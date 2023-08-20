@@ -19,8 +19,8 @@ Siga estas etapas para instalar o sistema em seu servidor:<br>
 Clone o repositório para o seu servidor web.
 
 git clone
-<a href="https://github.com/jmwho/carteira-estudantil.git
-"> https://github.com/jmwho/carteira-estudantil.git
+<a href="https://github.com/jmwho/carteira_estudantil.git
+"> https://github.com/jmwho/carteira_estudantil.git
 </a>
 
 Crie um banco de dados MySQL e importe o arquivo database.sql para criar as tabelas necessárias.
