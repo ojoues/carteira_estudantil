@@ -1,6 +1,13 @@
 <?php
 session_start();
-include_once("conexao.php");
+include_once("../../conexao.php");
+
+// Verifique se o usuário está logado
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../../src/admin/login.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +56,7 @@ include_once("conexao.php");
 						echo " ";
 						echo "<a href='proc_apagar_aluno.php?id=" . $row['id'] . "' class='btn btn-danger'>Apagar</a>";
 						echo " ";
-						echo "<a href='pesquisar.php?aluno=" . $row['id'] . "' class='btn btn-success' target='_blank'>Visualizar</a>";
+						echo "<a href='../../pesquisar.php?aluno=" . $row['id'] . "' class='btn btn-success' target='_blank'>Visualizar</a>";
 						echo " ";
 						echo "<a href='./src/dompdf/gerar_pdf.php?id=" . $row['id'] . "' class='btn btn-info' target='_blank'>Gerar PDF</a>";
 						echo "<hr>";
@@ -87,8 +94,8 @@ include_once("conexao.php");
 				}
 
 				echo "<a href='excluir_aluno.php?pagina=$quantidade_pg'>Última</a>";
-						?>
-					</ul>
+				?>
+				</ul>
 				</nav>
 			</div>
 		</div>

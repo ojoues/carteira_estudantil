@@ -1,6 +1,13 @@
 <?php
 session_start();
-include_once("conexao.php");
+
+// Verifique se o usuário está logado
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../../src/admin/login.php");
+    exit();
+}
+
+include_once("../../conexao.php");
 
 $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
 $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_FULL_SPECIAL_CHARS);

@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+// Verifique se o usuário está logado
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../../src/admin/login.php");
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -18,7 +25,7 @@ session_start();
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-6">
 				<a href="index.php" class="btn btn-primary">Listar</a><br><br>
-				<a href="../../admin.php" class="btn btn-primary">Área administrativa</a><br><br>
+				<a href="../../src/admin/admin.php" class="btn btn-primary">Área administrativa</a><br><br>
 				<div class="card">
 					<div class="card-header">Cadastro de usuário</div>
 					<?php

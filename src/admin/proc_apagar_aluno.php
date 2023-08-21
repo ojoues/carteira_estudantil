@@ -1,6 +1,13 @@
 <?php
 session_start();
-include_once("conexao.php");
+
+// Verifique se o usuário está logado
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../../src/admin/login.php");
+    exit();
+}
+
+include_once("../../conexao.php");
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 if (!empty($id)) {
 	$result_usuario = "DELETE FROM estudante WHERE id='$id'";

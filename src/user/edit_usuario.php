@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+// Verifique se o usuário está logado
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../../src/admin/login.php");
+    exit();
+}
+
 include_once("conexao.php");
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 $result_usuario = "SELECT * FROM usuarios WHERE id = '$id'";

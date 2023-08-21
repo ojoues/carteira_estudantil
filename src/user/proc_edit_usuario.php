@@ -2,6 +2,12 @@
 session_start();
 include_once("conexao.php");
 
+// Verifique se o usuário está logado
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../../src/admin/login.php");
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
     $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_FULL_SPECIAL_CHARS);

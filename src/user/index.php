@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+// Verifique se o usuário está logado
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../../src/admin/login.php");
+    exit();
+}
+
 include_once("conexao.php");
 ?>
 <!DOCTYPE html>
@@ -17,7 +24,7 @@ include_once("conexao.php");
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-8">
 				<a href="cad_usuario.php" class="btn btn-primary">Cadastrar</a><br><br>
-				<a href="../../admin.php" class="btn btn-primary">Área administrativa</a><br><br>
+				<a href="../../src/admin/admin.php" class="btn btn-primary">Área administrativa</a><br><br>
 				<h1>Listar Usuários</h1>
 				<?php
 				if (isset($_SESSION['msg'])) {

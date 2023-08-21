@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+// Verifique se o usuário está logado
+if (!isset($_SESSION['usuario_id'])) {
+	header("Location: ../../src/admin/login.php");
+	exit();
+}
+
 if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 	$caminho_arquivo = "./src/img/uploads/" . $_FILES["imagem"]["name"];
 	if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_arquivo)) {
