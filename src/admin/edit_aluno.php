@@ -3,11 +3,11 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: ../../src/admin/login.php");
-    exit();
+	header("Location: ../../src/admin/login.php");
+	exit();
 }
 
-include_once("conexao.php");
+include_once("../../conexao.php");
 
 $id = $_GET['id']; // Use $_GET para obter o ID da URL
 $result_usuario = "SELECT * FROM estudante WHERE id = '$id'";

@@ -7,7 +7,7 @@ if (!isset($_SESSION['usuario_id'])) {
     exit();
 }
 
-include_once("conexao.php");
+include_once("../../conexao.php");
 
 $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -22,8 +22,8 @@ $resultado_usuario = mysqli_query($conn, $result_usuario);
 
 if (mysqli_insert_id($conn)) {
 	$_SESSION['msg'] = "<p style='color:green;'>Usuário cadastrado com sucesso</p>";
-	header("Location: index.php");
+	header("Location: ../../src/user/index.php");
 } else {
 	$_SESSION['msg'] = "<p style='color:red;'>Usuário não foi cadastrado com sucesso</p>";
-	header("Location: cad_usuario.php");
+	header("Location: ../../src/user/cad_usuario.php");
 }

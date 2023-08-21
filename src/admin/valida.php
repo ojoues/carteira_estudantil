@@ -1,12 +1,6 @@
 <?php
 session_start();
 
-// Verifique se o usuário está logado
-if (!isset($_SESSION['usuario_id'])) {
-    header("Location: ../../src/admin/login.php");
-    exit();
-}
-
 include_once("../../conexao.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

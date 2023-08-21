@@ -30,7 +30,7 @@ if (!isset($_SESSION['usuario_id'])) {
                         <a href="excluir_aluno.php">Listar cadastros de alunos</a><br><br>
                         <a href="../../src/user/cad_usuario.php">Cadastrar usuário</a><br><br>
                         <a href="../../src/user/index.php">Listar cadastros de usuários</a><br><br>
-                        <a href="sair.php">Sair</a>
+                        <a href="../../src/admin/sair.php">Sair</a>
                     </div>
                 </div>
             </div>

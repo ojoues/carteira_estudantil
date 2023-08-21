@@ -19,7 +19,7 @@ $cpf_sem_formato = filter_input(INPUT_POST, 'cpf', FILTER_SANITIZE_FULL_SPECIAL_
 $validade = filter_input(INPUT_POST, 'validade', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 // Diretório onde as fotos serão armazenadas (Link do banco)
-$diretorio_destino = "./src/img/uploads/";
+$diretorio_destino = "../../src/img/uploads/";
 
 // Nome do arquivo original
 $nome_arquivo = $_FILES['imagem']['name'];
@@ -36,12 +36,12 @@ if (mysqli_affected_rows($conn)) {
 	// Move a imagem para o diretório de destino
 	if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_arquivo)) {
 		$_SESSION['msg'] = "<p style='color:green;'> Aluno editado com sucesso!</p>";
-		header("Location: excluir_aluno.php");
+		header("Location: ../../src/admin/excluir_aluno.php");
 	} else {
 		$_SESSION['msg'] = "<p style='color:red;'> Erro ao fazer upload da imagem.</p>";
-		header("Location: edit_aluno.php?id=$id");
+		header("Location: ../../src/admin/edit_aluno.php?id=$id");
 	}
 } else {
 	$_SESSION['msg'] = "<p style='color:red;'> Aluno não foi editado com sucesso!</p>";
-	header("Location: edit_aluno.php?id=$id");
+	header("Location: ../../src/admin/edit_aluno.php?id=$id");
 }

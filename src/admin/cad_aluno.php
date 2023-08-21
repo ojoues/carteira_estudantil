@@ -49,7 +49,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 					}
 					?>
 					<div class="card-body">
-						<form method="POST" action="processa.php" enctype="multipart/form-data">
+						<form method="POST" action="../../src/admin/processa.php" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="nome">Nome:</label>
 								<input type="text" class="form-control" name="nome" maxlength="220" placeholder="Ex.: João Paulo" required>
@@ -108,7 +108,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-	<script src="./src/js/script.js"></script>
+	<script src="../../src/js/script.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 

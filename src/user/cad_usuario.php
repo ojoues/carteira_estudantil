@@ -35,7 +35,7 @@ if (!isset($_SESSION['usuario_id'])) {
 					}
 					?>
 					<div class="card-body">
-						<form method="POST" action="proc_cad_usuario.php">
+						<form method="POST" action="../../src/user/proc_cad_usuario.php">
 
 							<div class="form-group">
 								<label for="nome">Nome: </label>
@@ -70,7 +70,7 @@ if (!isset($_SESSION['usuario_id'])) {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-	<script src="./src/js/script.js"></script>
+	<script src="../../src/js/script.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
