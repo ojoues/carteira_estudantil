@@ -44,7 +44,7 @@ include_once("conexao.php");
 						echo "<hr>";
 						echo "ID: " . $row['id'] . "<br>";
 						echo "Nome: " . $row['nome'] . "<br>";
-						echo "CPF: " . $row['cpf'] . "<br>";
+						echo "CPF: " . substr($row['cpf'], 0, 3) . '.' . substr($row['cpf'], 3, 3) . '.' . substr($row['cpf'], 6, 3) . '-' . substr($row['cpf'], 9, 2) . "<br>";
 						echo "<a href='edit_aluno.php?id=" . $row['id'] . "' class='btn btn-primary'>Editar</a>";
 						echo " ";
 						echo "<a href='proc_apagar_aluno.php?id=" . $row['id'] . "' class='btn btn-danger'>Apagar</a>";
