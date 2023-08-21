@@ -52,6 +52,7 @@ include_once("conexao.php");
 						echo "<a href='pesquisar.php?aluno=" . $row['id'] . "' class='btn btn-success' target='_blank'>Visualizar</a>";
 						echo " ";
 						echo "<a href='./src/dompdf/gerar_pdf.php?id=" . $row['id'] . "' class='btn btn-info' target='_blank'>Gerar PDF</a>";
+						echo "<hr>";
 					}
 				} else {
 					echo "<p>Nenhum aluno cadastrado.</p>";
@@ -59,39 +60,33 @@ include_once("conexao.php");
 
 				echo "<br><br>";
 
-				$query = "SELECT COUNT(id) AS num_result FROM estudante";
-				$result = mysqli_query($conn, $query);
+				//Somar a quantidade de usuários
+				$result_pg = "SELECT COUNT(id) AS num_result FROM estudante";
+				$resultado_pg = mysqli_query($conn, $result_pg);
+				$row_pg = mysqli_fetch_assoc($resultado_pg);
+				//echo $row_pg['num_result'];
+				//Quantidade de pagina 
+				$quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pg);
 
-				if (!$result) {
-					die('Erro na consulta SQL: ' . mysqli_error($conn));
+				//Limitar os link antes depois
+				$max_links = 2;
+				echo "<a href='excluir_aluno.php?pagina=1'>Primeira</a> ";
+
+				for ($pag_ant = $pagina - $max_links; $pag_ant <= $pagina - 1; $pag_ant++) {
+					if ($pag_ant >= 1) {
+						echo "<a href='excluir_aluno.php?pagina=$pag_ant'>$pag_ant</a> ";
+					}
 				}
 
-				$row_pg = mysqli_fetch_assoc($result);
-				$quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pg);
-				?>
+				echo "$pagina ";
 
-				<nav aria-label="Navegação de páginas">
-					<ul class="pagination">
-						<?php
-						if ($pagina > 1) {
-							echo "<li class='page-item'><a class='page-link' href='excluir_aluno.php?pagina=1'>Primeira</a></li>";
-							$pagina_ant = $pagina - 1;
-							echo "<li class='page-item'><a class='page-link' href='excluir_aluno.php?pagina=$pagina_ant'>Anterior</a></li>";
-						}
+				for ($pag_dep = $pagina + 1; $pag_dep <= $pagina + $max_links; $pag_dep++) {
+					if ($pag_dep <= $quantidade_pg) {
+						echo "<a href='excluir_aluno.php?pagina=$pag_dep'>$pag_dep</a> ";
+					}
+				}
 
-						for ($pag = max(1, $pagina - 2); $pag <= min($pagina + 2, $quantidade_pg); $pag++) {
-							if ($pagina == $pag) {
-								echo "<li class='page-item active'><span class='page-link'>$pag</span></li>";
-							} else {
-								echo "<li class='page-item'><a class='page-link' href='excluir_aluno.php?pagina=$pag'>$pag</a></li>";
-							}
-						}
-
-						if ($pagina < $quantidade_pg) {
-							$pagina_dep = $pagina + 1;
-							echo "<li class='page-item'><a class='page-link' href='excluir_aluno.php?pagina=$pagina_dep'>Próxima</a></li>";
-							echo "<li class='page-item'><a class='page-link' href='excluir_aluno.php?pagina=$quantidade_pg'>Última</a></li>";
-						}
+				echo "<a href='excluir_aluno.php?pagina=$quantidade_pg'>Última</a>";
 						?>
 					</ul>
 				</nav>

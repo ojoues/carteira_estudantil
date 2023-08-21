@@ -2,20 +2,36 @@
 session_start();
 include_once("conexao.php");
 
-$id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
-$nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $novaSenha = $_POST['nova_senha'];
 
-//echo "Nome: $nome <br>";
-//echo "E-mail: $email <br>";
+    // Verificar se o campo da nova senha foi preenchido
+    if (!empty($novaSenha)) {
+        // Criptografar a nova senha antes de armazená-la no banco de dados
+        $senhaHash = password_hash($novaSenha, PASSWORD_DEFAULT);
 
-$result_usuario = "UPDATE usuarios SET nome='$nome', email='$email', modified=NOW() WHERE id='$id'";
-$resultado_usuario = mysqli_query($conn, $result_usuario);
+        // Atualizar o registro no banco de dados com a nova senha criptografada
+        $stmt = $conn->prepare("UPDATE usuarios SET nome = ?, usuario = ?, email = ?, senha = ? WHERE id = ?");
+        $stmt->bind_param("ssssi", $nome, $usuario, $email, $senhaHash, $id);
+    } else {
+        // Se o campo da nova senha estiver vazio, atualizar sem alterar a senha
+        $stmt = $conn->prepare("UPDATE usuarios SET nome = ?, usuario = ?, email = ? WHERE id = ?");
+        $stmt->bind_param("sssi", $nome, $usuario, $email, $id);
+    }
 
-if(mysqli_affected_rows($conn)){
-	$_SESSION['msg'] = "<p style='color:green;'>Usuário editado com sucesso</p>";
-	header("Location: index.php");
-}else{
-	$_SESSION['msg'] = "<p style='color:red;'>Usuário não foi editado com sucesso</p>";
-	header("Location: editar.php?id=$id");
+    if ($stmt->execute()) {
+        $_SESSION['msg'] = "Usuário atualizado com sucesso.<br>";
+    } else {
+        $_SESSION['msg'] = "Erro ao atualizar o usuário: <br>" . $conn->error;
+    }
+
+    $stmt->close();
+    $conn->close();
+
+    header("Location: index.php");
+    exit();
 }

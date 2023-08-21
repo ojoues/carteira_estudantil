@@ -21,7 +21,7 @@ if (isset($_GET['id'])) {
     $idEstudante = $_GET['id'];
 
     // QUERY para recuperar o registro do banco de dados com base no ID
-    $query_estudante = "SELECT imagem, nome, instituicao, curso, data_nascimento, sexo, cpf FROM estudante WHERE id = :id";
+    $query_estudante = "SELECT imagem, nome, instituicao, curso, data_nascimento, sexo, cpf, id FROM estudante WHERE id = :id";
 
     // Prepara a QUERY
     $result_estudante = $conn->prepare($query_estudante);
@@ -68,6 +68,8 @@ if (isset($_GET['id'])) {
         // Formatar o CPF com a máscara
         $cpfFormatado = formatarCpf($row_estudante['cpf']);
         $dados .= "CPF: <br>" . $cpfFormatado . "<br>";
+
+        $dados .= "ID: <br>" . $row_estudante['id'] . "<br>";
 
         $dados .= "<hr>";
     } else {

@@ -21,7 +21,9 @@ session_start();
                     <div class="card-header">Área Administrativa</div>
                     <div class="card-body">
                         <a href="cad_aluno.php">Cadastrar aluno</a><br><br>
-                        <a href="excluir_aluno.php">Listar cadastros</a><br><br>
+                        <a href="excluir_aluno.php">Listar cadastros de alunos</a><br><br>
+                        <a href="./src/user/cad_usuario.php">Cadastrar usuário</a><br><br>
+                        <a href="./src/user/index.php">Listar cadastros de usuários</a><br><br>
                         <a href="sair.php">Sair</a>
                     </div>
                 </div>
