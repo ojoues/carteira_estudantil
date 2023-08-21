@@ -77,7 +77,9 @@ function mask($val, $mask)
             foreach ($alunos as $row_aluno) {
             ?>
                 <div class="col-12 col-sm-12 col-md-2 col-lg-2">
-                    <img src="<?php echo $row_aluno['imagem']; ?>" class=" img img-responsive img-thumbnail" width="200" alt="Foto do aluno" /><br><br>
+                    <img src="<?php
+                                echo $row_aluno['imagem'];
+                                ?>" class=" img img-responsive img-thumbnail" width="200" alt="Foto do aluno" /><br><br>
                 </div>
                 <div class="col-12 col-sm-12 col-md-5 col-lg-5">
                     <h3>Nome:</h3>

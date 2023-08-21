@@ -50,6 +50,8 @@ include_once("conexao.php");
 						echo "<a href='proc_apagar_aluno.php?id=" . $row['id'] . "' class='btn btn-danger'>Apagar</a>";
 						echo " ";
 						echo "<a href='pesquisar.php?aluno=" . $row['id'] . "' class='btn btn-success' target='_blank'>Visualizar</a>";
+						echo " ";
+						echo "<a href='./src/dompdf/gerar_pdf.php?id=" . $row['id'] . "' class='btn btn-info' target='_blank'>Gerar PDF</a>";
 					}
 				} else {
 					echo "<p>Nenhum aluno cadastrado.</p>";
