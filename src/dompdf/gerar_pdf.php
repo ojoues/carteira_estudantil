@@ -3,7 +3,7 @@
 require './vendor/autoload.php';
 
 // Incluir conexao com BD
-include_once './conexao.php';
+include_once '../../conexao.php';
 
 // Importar o namespace Dompdf
 use Dompdf\Dompdf;
