@@ -3,7 +3,7 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: ../../src/admin/login.php");
+    header("Location: ../../login.php");
     exit();
 }
 
@@ -22,8 +22,8 @@ $resultado_usuario = mysqli_query($conn, $result_usuario);
 
 if (mysqli_insert_id($conn)) {
 	$_SESSION['msg'] = "<p style='color:green;'>Usuário cadastrado com sucesso</p>";
-	header("Location: ../../src/user/index.php");
+	header("Location: index.php");
 } else {
 	$_SESSION['msg'] = "<p style='color:red;'>Usuário não foi cadastrado com sucesso</p>";
-	header("Location: ../../src/user/cad_usuario.php");
+	header("Location: cad_usuario.php");
 }

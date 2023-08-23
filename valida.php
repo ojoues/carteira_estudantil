@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include_once("../../conexao.php");
+include_once("conexao.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_FULL_SPECIAL_CHARS); // Validação alfanumérica
@@ -18,15 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			if (password_verify($senha, $row['senha'])) {
 				$_SESSION['usuario_id'] = $row['id'];
 				$_SESSION['usuario_nome'] = $row['nome'];
-				header("Location: ../admin/admin.php");
+				header("Location: admin.php");
 				exit();
 			} else {
 				$_SESSION['msg'] = "Senha incorreta para o usuário '$usuario'.";
-				header("Location: ../admin/admin.php");
+				header("Location: admin.php");
 			}
 		} else {
 			$_SESSION['msg'] = "Usuário '$usuario' não encontrado.";
-			header("Location: ../admin/admin.php");
+			header("Location: admin.php");
 		}
 	} else {
 		$_SESSION['msg'] = "Por favor, preencha todos os campos.";

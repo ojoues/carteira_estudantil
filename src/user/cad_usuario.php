@@ -3,9 +3,11 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: ../../src/admin/login.php");
-    exit();
+	header("Location: ../../login.php");
+	exit();
 }
+
+include_once("../../conexao.php");
 
 ?>
 <!DOCTYPE html>
@@ -25,7 +27,7 @@ if (!isset($_SESSION['usuario_id'])) {
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-6">
 				<a href="index.php" class="btn btn-primary">Listar</a><br><br>
-				<a href="../../src/admin/admin.php" class="btn btn-primary">Área administrativa</a><br><br>
+				<a href="../../admin.php" class="btn btn-primary">Área administrativa</a><br><br>
 				<div class="card">
 					<div class="card-header">Cadastro de usuário</div>
 					<?php
@@ -35,7 +37,7 @@ if (!isset($_SESSION['usuario_id'])) {
 					}
 					?>
 					<div class="card-body">
-						<form method="POST" action="../../src/user/proc_cad_usuario.php">
+						<form method="POST" action="proc_cad_usuario.php">
 
 							<div class="form-group">
 								<label for="nome">Nome: </label>

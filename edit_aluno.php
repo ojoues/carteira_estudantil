@@ -3,37 +3,52 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-	header("Location: ../../src/admin/login.php");
+	header("Location: login.php");
 	exit();
 }
 
-include_once("../../conexao.php");
+include_once("conexao.php");
 
-$id = $_GET['id']; // Use $_GET para obter o ID da URL
-$result_usuario = "SELECT * FROM estudante WHERE id = '$id'";
-$resultado_usuario = mysqli_query($conn, $result_usuario);
-$row_usuario = mysqli_fetch_assoc($resultado_usuario);
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0; // Use intval para obter um valor inteiro
+$result_usuario = mysqli_query($conn, "SELECT * FROM estudante WHERE id = $id");
 
-if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"]["name"])) { // Verifique se a imagem foi enviada corretamente
-	$caminho_arquivo = "./src/img/uploads/" . $_FILES["imagem"]["name"];
+if (!$result_usuario) {
+	$_SESSION['msg'] = "<p style='color:red;'>Erro ao buscar o estudante no banco de dados.</p>";
+	header("Location: excluir_aluno.php");
+	exit();
+}
 
-	// Move o arquivo para o diretório de uploads
-	if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_arquivo)) {
-		// Atualiza o caminho da imagem no banco de dados
-		$atualiza_imagem = "UPDATE estudante SET caminho_imagem='$caminho_arquivo' WHERE id='$id'";
-		$resultado_atualiza_imagem = mysqli_query($conn, $atualiza_imagem);
+$row_usuario = mysqli_fetch_assoc($result_usuario);
 
-		if (!$resultado_atualiza_imagem) {
-			$_SESSION['msg'] = "<p style='color:red;'>Erro ao atualizar o caminho da imagem no banco de dados.</p>";
-			header("Location: editar.php?id=$id");
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	// ...
+
+	// Verifica se uma nova imagem foi enviada
+	if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"]["name"])) {
+		$caminho_arquivo = "./src/img/uploads/" . $_FILES["imagem"]["name"];
+
+		// Move o arquivo para o diretório de uploads
+		if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_arquivo)) {
+			// Atualiza o caminho da imagem no banco de dados
+			$atualiza_imagem = "UPDATE estudante SET caminho_imagem='$caminho_arquivo' WHERE id=$id";
+			$resultado_atualiza_imagem = mysqli_query($conn, $atualiza_imagem);
+
+			if (!$resultado_atualiza_imagem) {
+				$_SESSION['msg'] = "<p style='color:red;'>Erro ao atualizar o caminho da imagem no banco de dados.</p>";
+				header("Location: edit_aluno.php?id=$id");
+				exit();
+			}
+		} else {
+			$_SESSION['msg'] = "<p style='color:red;'>Erro ao fazer upload da imagem.</p>";
+			header("Location: edit_aluno.php?id=$id");
 			exit();
 		}
-	} else {
-		$_SESSION['msg'] = "<p style='color:red;'>Erro ao fazer upload da imagem.</p>";
-		header("Location: editar.php?id=$id");
-		exit();
 	}
+
+	// ...
 }
+
+?>
 
 ?>
 
@@ -102,12 +117,12 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"]["name"])) { // Verifiqu
 								<option value="1" <?php if ($row_usuario['validade'] == '1') echo 'selected'; ?>>Documento Válido</option>
 							</select>
 
-
 							<div class="form-group">
-								<label for="imagem">Foto do Aluno:</label>
-								<input type="file" class="form-control-file" name="imagem" accept="image/*" value="<?php echo $row_usuario['imagem']; ?>" required>
+								<label for="imagem">Imagem:</label>
+								<input type="file" class="form-control-file" name="imagem" accept=".jpg, .jpeg">
 							</div>
-							<button type="submit" class="btn btn-primary" value="Acessar">Corrigir</button><br><br>
+
+							<button type="submit" class="btn btn-primary" value="Corrigir">Corrigir</button><br><br>
 
 							<a href="admin.php">Voltar</a>
 						</form>
@@ -122,7 +137,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"]["name"])) { // Verifiqu
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-	<script src="./src/js/script.js"></script>
+	<script src="src/js/script.js"></script>
 </body>
 
 </html>

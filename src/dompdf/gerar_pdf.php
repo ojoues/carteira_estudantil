@@ -37,9 +37,10 @@ if (isset($_GET['id'])) {
     $dados .= "<html lang='pt-br'>";
     $dados .= "<head>";
     $dados .= "<meta charset='UTF-8'>";
+    $dados .= "<link rel='stylesheet' href='css/custom.css'>";
     $dados .= "<title>Carteira Estudantil</title>";
     $dados .= "</head>";
-    $dados .= "<body>";
+    $dados .= "<body'>";
     $dados .= "<h1>DNE</h1>";
     $dados .= "<h4>Documento Nacional do Estudante</h4>";
 
@@ -47,7 +48,9 @@ if (isset($_GET['id'])) {
     $row_estudante = $result_estudante->fetch(PDO::FETCH_ASSOC);
 
     if ($row_estudante) {
-        $dados .= "<img src='" . $row_estudante['imagem'] . "' <br>";
+        $imagemAbsoluta = $_SERVER['DOCUMENT_ROOT'] . $row_estudante['imagem'];
+
+        $dados .= "<img src='" . $imagemAbsoluta . "' <br>";
         $dados .= "Nome: <br>" . $row_estudante['nome'] . "<br>";
         $dados .= "Instituição de Ensino: <br>" . $row_estudante['instituicao'] . "<br>";
         $dados .= "Curso/Série: <br>" . $row_estudante['curso'] . "<br>";

@@ -3,7 +3,7 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: ../../src/admin/login.php");
+    header("Location: ../../login.php");
     exit();
 }
 
@@ -23,8 +23,8 @@ include_once("../../conexao.php");
 	<div class="container">
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-8">
-				<a href="../../src/user/cad_usuario.php" class="btn btn-primary">Cadastrar</a><br><br>
-				<a href="../../src/admin/admin.php" class="btn btn-primary">Área administrativa</a><br><br>
+				<a href="cad_usuario.php" class="btn btn-primary">Cadastrar</a><br><br>
+				<a href="../../admin.php" class="btn btn-primary">Área administrativa</a><br><br>
 				<h1>Listar Usuários</h1>
 				<?php
 				if (isset($_SESSION['msg'])) {
@@ -50,9 +50,9 @@ include_once("../../conexao.php");
 					echo "Nome: " . $row_usuario['nome'] . "<br>";
 					echo "Usuário: " . $row_usuario['usuario'] . "<br>";
 					echo "E-mail: " . $row_usuario['email'] . "<br>";
-					echo "<a href='../../src/user/edit_usuario.php?id=" . $row_usuario['id'] . "' class='btn btn-primary'>Editar</a>";
+					echo "<a href='edit_usuario.php?id=" . $row_usuario['id'] . "' class='btn btn-primary'>Editar</a>";
 					echo " ";
-					echo "<a href='../../src/user/proc_apagar_usuario.php?id=" . $row_usuario['id'] . "' class='btn btn-danger'>Apagar</a>";
+					echo "<a href='proc_apagar_usuario.php?id=" . $row_usuario['id'] . "' class='btn btn-danger'>Apagar</a>";
 					echo "<hr>";
 				}
 
@@ -66,11 +66,11 @@ include_once("../../conexao.php");
 
 				//Limitar os link antes depois
 				$max_links = 2;
-				echo "<a href='../../src/user/index.php?pagina=1'>Primeira</a> ";
+				echo "<a href='index.php?pagina=1'>Primeira</a> ";
 
 				for ($pag_ant = $pagina - $max_links; $pag_ant <= $pagina - 1; $pag_ant++) {
 					if ($pag_ant >= 1) {
-						echo "<a href='../../src/user/index.php?pagina=$pag_ant'>$pag_ant</a> ";
+						echo "<a href='index.php?pagina=$pag_ant'>$pag_ant</a> ";
 					}
 				}
 
@@ -78,11 +78,11 @@ include_once("../../conexao.php");
 
 				for ($pag_dep = $pagina + 1; $pag_dep <= $pagina + $max_links; $pag_dep++) {
 					if ($pag_dep <= $quantidade_pg) {
-						echo "<a href='../../src/user/index.php?pagina=$pag_dep'>$pag_dep</a> ";
+						echo "<a href='index.php?pagina=$pag_dep'>$pag_dep</a> ";
 					}
 				}
 
-				echo "<a href='../../src/user/index.php?pagina=$quantidade_pg'>Última</a>";
+				echo "<a href='index.php?pagina=$quantidade_pg'>Última</a>";
 
 				?>
 			</div>

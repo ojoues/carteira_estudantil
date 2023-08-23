@@ -3,7 +3,7 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-	header("Location: ../../src/admin/login.php");
+	header("Location: login.php");
 	exit();
 }
 
@@ -49,7 +49,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 					}
 					?>
 					<div class="card-body">
-						<form method="POST" action="../../src/admin/processa.php" enctype="multipart/form-data">
+						<form method="POST" action="processa.php" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="nome">Nome:</label>
 								<input type="text" class="form-control" name="nome" maxlength="220" placeholder="Ex.: João Paulo" required>
@@ -91,7 +91,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 
 							<div class="form-group">
 								<label for="imagem">Foto do Aluno:</label>
-								<input type="file" class="form-control-file" name="imagem" accept="image/*" required>
+								<input type="file" class="form-control-file" name="imagem" accept=".jpg, .jpeg" required>
 							</div>
 							<button type="submit" name="btnLogin" class="btn btn-primary" value="Acessar">Cadastrar</button><br><br>
 
@@ -108,7 +108,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-	<script src="../../src/js/script.js"></script>
+	<script src="src/js/script.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
