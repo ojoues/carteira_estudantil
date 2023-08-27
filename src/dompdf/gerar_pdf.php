@@ -37,12 +37,12 @@ if (isset($_GET['id'])) {
     $dados .= "<html lang='pt-br'>";
     $dados .= "<head>";
     $dados .= "<meta charset='UTF-8'>";
-    $dados .= "<link rel='stylesheet' href='css/custom.css'>";
     $dados .= "<title>Carteira Estudantil</title>";
+    $dados .= "<link rel='stylesheet' href='style.css'>"; // Inclua aqui o caminho correto para o arquivo CSS externo
+    $dados .= "<style>";
+    $dados .= "</style>";
     $dados .= "</head>";
-    $dados .= "<body'>";
-    $dados .= "<h1>DNE</h1>";
-    $dados .= "<h4>Documento Nacional do Estudante</h4>";
+    $dados .= "<body>";
 
     // Ler o registro do estudante retornado do BD
     $row_estudante = $result_estudante->fetch(PDO::FETCH_ASSOC);
@@ -50,12 +50,17 @@ if (isset($_GET['id'])) {
     if ($row_estudante) {
         $imagemAbsoluta = $_SERVER['DOCUMENT_ROOT'] . $row_estudante['imagem'];
 
-        $dados .= "<img src='" . $imagemAbsoluta . "' <br>";
-        $dados .= "Nome: <br>" . $row_estudante['nome'] . "<br>";
-        $dados .= "Instituição de Ensino: <br>" . $row_estudante['instituicao'] . "<br>";
-        $dados .= "Curso/Série: <br>" . $row_estudante['curso'] . "<br>";
+        $dados .= "<div class='left-column'>";
+        $dados .= "</div>";
+        $dados .= "<div class='right-column'>";
+        $dados .= "<h1>DNE</h1>";
+        $dados .= "<h4>Documento Nacional do Estudante</h4>";
+        $dados .= "<img src='" . $imagemAbsoluta . "'><br>";
+        $dados .= "Nome: " . $row_estudante['nome'] . "<br>";
+        $dados .= "Instituição de Ensino: " . $row_estudante['instituicao'] . "<br>";
+        $dados .= "Curso/Série: " . $row_estudante['curso'] . "<br>";
         $formattedData = date('d/m/Y', strtotime($row_estudante['data_nascimento'])); // Formata a data
-        $dados .= "Data de Nascimento: <br>" . $formattedData . "<br>";
+        $dados .= "Data de Nascimento: " . $formattedData . "<br>";
 
         // Verificar o valor da coluna "sexo" e atribuir o texto apropriado
         if ($row_estudante['sexo'] == 1) {
@@ -66,22 +71,24 @@ if (isset($_GET['id'])) {
             $sexoTexto = "Não especificado"; // Adicione uma opção padrão caso o valor não seja 0 nem 1
         }
 
-        $dados .= "Sexo: <br>" . $sexoTexto . "<br>";
+        $dados .= "Sexo: " . $sexoTexto . "<br>";
 
         // Formatar o CPF com a máscara
         $cpfFormatado = formatarCpf($row_estudante['cpf']);
-        $dados .= "CPF: <br>" . $cpfFormatado . "<br>";
+        $dados .= "CPF: " . $cpfFormatado . "<br>";
 
-        $dados .= "ID: <br>" . $row_estudante['id'] . "<br>";
+        $dados .= "ID: " . $row_estudante['id'] . "<br>";
 
         $dados .= "<hr>";
+        $dados .= "Documento padronizado nacionalmente conforme a Lei 12.933/2013<br>";
+        $dados .= "Válido em todo território nacional até o mês de ano";
+        $dados .= "</div>";
     } else {
         $dados .= "<p>Estudante não encontrado.</p>";
     }
 
-    $dados .= "Documento padronizado nacionalmente conforme a Lei 12.933/2013<br>
-    Válido em todo território nacional até mes de ano";
     $dados .= "</body>";
+    $dados .= "</html>";
 
     // Instanciar e usar a classe dompdf
     $dompdf = new Dompdf(['enable_remote' => true]);
@@ -95,8 +102,12 @@ if (isset($_GET['id'])) {
     // Renderizar o HTML como PDF
     $dompdf->render();
 
-    // Gerar o PDF
-    $dompdf->stream();
+    if ($row_estudante) { // Verificar se o estudante foi encontrado
+        // Gerar o PDF e especificar o nome do arquivo
+        $dompdf->stream("Carteira Estudantil (" . $row_estudante['id'] . ").pdf");
+    } else {
+        echo "<p>ID do estudante não fornecido.</p>";
+    }
 } else {
     echo "<p>ID do estudante não fornecido.</p>";
 }
