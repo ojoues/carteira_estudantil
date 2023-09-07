@@ -35,6 +35,9 @@ $dbname = "db_alunos";<br>
 //Criar a conexao<br>
 $conn = mysqli_connect($servidor, $usuario, $senha, $dbname);<br>
 
+// Substitua 'America/Sao_Paulo' pelo fuso horário desejado
+date_default_timezone_set('America/Sao_Paulo');
+
 <h3>Contribuição</h3>
 Se você deseja contribuir para o desenvolvimento deste sistema, sinta-se à vontade para criar um fork do repositório, fazer as alterações necessárias e enviar um pull request. Ficaremos felizes em revisar suas contribuições.<br><br>
 
