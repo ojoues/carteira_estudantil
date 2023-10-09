@@ -3,7 +3,7 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-	header("Location: login.php");
+	header("Location: login");
 	exit();
 }
 
@@ -34,12 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 			if (!$resultado_atualiza_imagem) {
 				$_SESSION['msg'] = "<p style='color:red;'>Erro ao atualizar o caminho da imagem no banco de dados.</p>";
-				header("Location: edit_aluno.php?id=$id");
+				header("Location: edit_aluno?id=$id");
 				exit();
 			}
 		} else {
 			$_SESSION['msg'] = "<p style='color:red;'>Erro ao fazer upload da imagem.</p>";
-			header("Location: edit_aluno.php?id=$id");
+			header("Location: edit_aluno?id=$id");
 			exit();
 		}
 	}
@@ -59,10 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	// Execute a consulta
 	if ($stmt->execute()) {
 		$_SESSION['msg'] = "<p style='color:green;'>Aluno(a) '$nome' editado com sucesso!</p>";
-		header("Location: excluir_aluno.php");
+		header("Location: excluir_aluno");
 	} else {
 		$_SESSION['msg'] = "<p style='color:red;'>Aluno(a) '$nome' não foi editado com sucesso!</p>";
-		header("Location: edit_aluno.php?id=$id");
+		header("Location: edit_aluno?id=$id");
 	}
 
 	$stmt->close();

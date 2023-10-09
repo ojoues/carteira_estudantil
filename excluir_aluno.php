@@ -4,8 +4,8 @@ include_once("conexao.php");
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: login.php");
-    exit();
+	header("Location: login");
+	exit();
 }
 
 ?>
@@ -16,6 +16,7 @@ if (!isset($_SESSION['usuario_id'])) {
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+	<link rel="stylesheet" href="src/css/removeAds.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Lista de cadastros</title>
 </head>
@@ -24,8 +25,8 @@ if (!isset($_SESSION['usuario_id'])) {
 	<div class="container">
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-8">
-				<a href="cad_aluno.php" class="btn btn-primary">Cadastrar</a><br><br>
-				<a href="admin.php" class="btn btn-primary">Área administrativa</a><br><br>
+				<a href="cad_aluno" class="btn btn-primary">Cadastrar</a><br><br>
+				<a href="admin" class="btn btn-primary">Área administrativa</a><br><br>
 				<h1>Alunos cadastrados</h1>
 
 				<?php
@@ -39,7 +40,8 @@ if (!isset($_SESSION['usuario_id'])) {
 				$pagina = (!empty($pagina_atual)) ? $pagina_atual : 1;
 				$inicio = ($qnt_result_pg * $pagina) - $qnt_result_pg;
 
-				$query = "SELECT * FROM estudante LIMIT $inicio, $qnt_result_pg";
+				$query = "SELECT * FROM estudante ORDER BY criado DESC LIMIT $inicio, $qnt_result_pg";
+
 				$result = mysqli_query($conn, $query);
 
 				if (!$result) {
@@ -52,13 +54,14 @@ if (!isset($_SESSION['usuario_id'])) {
 						echo "ID: " . $row['id'] . "<br>";
 						echo "Nome: " . $row['nome'] . "<br>";
 						echo "CPF: " . substr($row['cpf'], 0, 3) . '.' . substr($row['cpf'], 3, 3) . '.' . substr($row['cpf'], 6, 3) . '-' . substr($row['cpf'], 9, 2) . "<br>";
-						echo "<a href='edit_aluno.php?id=" . $row['id'] . "' class='btn btn-primary'>Editar</a>";
+						echo "<a href='edit_aluno?id=" . $row['id'] . "' class='btn btn-primary'>Editar</a>";
 						echo " ";
-						echo "<a href='proc_apagar_aluno.php?id=" . $row['id'] . "' class='btn btn-danger'>Apagar</a>";
+						echo "<a href='proc_apagar_aluno?id=" . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . "' class='btn btn-danger delete-button confirm-delete' data-nome='" . htmlspecialchars($row['nome'], ENT_QUOTES, 'UTF-8') . "'>Apagar</a>";
+
 						echo " ";
-						echo "<a href='pesquisar.php?aluno=" . $row['id'] . "' class='btn btn-success' target='_blank'>Visualizar</a>";
+						echo "<a href='pesquisar?aluno=" . $row['id'] . "' class='btn btn-success' target='_blank'>Visualizar</a>";
 						echo " ";
-						echo "<a href='src/dompdf/gerar_pdf.php?id=" . $row['id'] . "' class='btn btn-info' target='_blank'>Gerar PDF</a>";
+						echo "<a href='src/dompdf/gerar_pdf?id=" . $row['id'] . "' class='btn btn-info' target='_blank'>Gerar PDF</a>";
 						echo "<hr>";
 					}
 				} else {
@@ -77,11 +80,11 @@ if (!isset($_SESSION['usuario_id'])) {
 
 				//Limitar os link antes depois
 				$max_links = 2;
-				echo "<a href='excluir_aluno.php?pagina=1'>Primeira</a> ";
+				echo "<a href='excluir_aluno?pagina=1'>Primeira</a> ";
 
 				for ($pag_ant = $pagina - $max_links; $pag_ant <= $pagina - 1; $pag_ant++) {
 					if ($pag_ant >= 1) {
-						echo "<a href='excluir_aluno.php?pagina=$pag_ant'>$pag_ant</a> ";
+						echo "<a href='excluir_aluno?pagina=$pag_ant'>$pag_ant</a> ";
 					}
 				}
 
@@ -89,17 +92,18 @@ if (!isset($_SESSION['usuario_id'])) {
 
 				for ($pag_dep = $pagina + 1; $pag_dep <= $pagina + $max_links; $pag_dep++) {
 					if ($pag_dep <= $quantidade_pg) {
-						echo "<a href='excluir_aluno.php?pagina=$pag_dep'>$pag_dep</a> ";
+						echo "<a href='excluir_aluno?pagina=$pag_dep'>$pag_dep</a> ";
 					}
 				}
 
-				echo "<a href='excluir_aluno.php?pagina=$quantidade_pg'>Última</a>";
+				echo "<a href='excluir_aluno?pagina=$quantidade_pg'>Última</a>";
 				?>
 				</ul>
 				</nav>
 			</div>
 		</div>
 	</div>
+	<script src="src/js/confirmaExcluirAluno.js"></script>
 </body>
 
 </html>

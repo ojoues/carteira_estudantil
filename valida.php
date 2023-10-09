@@ -18,15 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			if (password_verify($senha, $row['senha'])) {
 				$_SESSION['usuario_id'] = $row['id'];
 				$_SESSION['usuario_nome'] = $row['nome'];
-				header("Location: admin.php");
+				header("Location: admin");
 				exit();
 			} else {
 				$_SESSION['msg'] = "Senha incorreta para o usuário '$usuario'.";
-				header("Location: admin.php");
+				header("Location: admin");
 			}
 		} else {
 			$_SESSION['msg'] = "Usuário '$usuario' não encontrado.";
-			header("Location: admin.php");
+			header("Location: admin");
 		}
 	} else {
 		$_SESSION['msg'] = "Por favor, preencha todos os campos.";

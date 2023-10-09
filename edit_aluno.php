@@ -3,7 +3,7 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-	header("Location: login.php");
+	header("Location: login");
 	exit();
 }
 
@@ -14,7 +14,7 @@ $result_usuario = mysqli_query($conn, "SELECT * FROM estudante WHERE id = $id");
 
 if (!$result_usuario) {
 	$_SESSION['msg'] = "<p style='color:red;'>Erro ao buscar o estudante no banco de dados.</p>";
-	header("Location: excluir_aluno.php");
+	header("Location: excluir_aluno");
 	exit();
 }
 
@@ -35,12 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 			if (!$resultado_atualiza_imagem) {
 				$_SESSION['msg'] = "<p style='color:red;'>Erro ao atualizar o caminho da imagem no banco de dados.</p>";
-				header("Location: edit_aluno.php?id=$id");
+				header("Location: edit_aluno?id=$id");
 				exit();
 			}
 		} else {
 			$_SESSION['msg'] = "<p style='color:red;'>Erro ao fazer upload da imagem.</p>";
-			header("Location: edit_aluno.php?id=$id");
+			header("Location: edit_aluno?id=$id");
 			exit();
 		}
 	}
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-
+	<link rel="stylesheet" href="src/css/removeAds.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<title>Cadastro de Aluno</title>
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<div class="container">
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-6">
-				<a href="excluir_aluno.php" class="btn btn-primary">Listar</a><br><br>
+				<a href="excluir_aluno" class="btn btn-primary">Listar</a><br><br>
 				<div class="card">
 					<div class="card-header">Editar cadastro de aluno</div>
 					<?php
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 					}
 					?>
 					<div class="card-body">
-						<form method="POST" action="proc_edit_aluno.php" enctype="multipart/form-data">
+						<form method="POST" action="proc_edit_aluno" enctype="multipart/form-data">
 							<input type="hidden" name="id" value="<?php echo $row_usuario['id']; ?>">
 							<div class="form-group">
 								<label for="nome">Nome:</label>
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 							<div class="form-group">
 								<label for="cpf">CPF:</label>
-								<input type="text" class="form-control" name="cpf" maxlength="14" oninput="formatarCpf(this)" value="<?php echo $row_usuario['cpf']; ?>" required>
+								<input type="text" class="form-control" name="cpf" maxlength="11" value="<?php echo $row_usuario['cpf']; ?>" required>
 							</div>
 
 							<label for="validade">Validade:</label>
@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 							<button type="submit" class="btn btn-primary" value="Corrigir">Corrigir</button><br><br>
 
-							<a href="admin.php">Voltar</a>
+							<a href="admin">Voltar</a>
 						</form>
 					</div>
 				</div>
@@ -134,8 +134,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-	<script src="src/js/script.js"></script>
 </body>
 
 </html>

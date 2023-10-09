@@ -8,6 +8,12 @@ $pesquisar = $_GET['aluno'];
 $result = "SELECT * FROM estudante WHERE id LIKE '$pesquisar'";
 $resultado_alunos = mysqli_query($conn, $result);
 
+// Verifica se há algum registro correspondente
+if (mysqli_num_rows($resultado_alunos) == 0) {
+    header("Location: index?mensagem=Aluno(a)%20não%20cadastrado(a)");
+    exit;
+}
+
 function mask($val, $mask)
 {
     $maskared = '';
@@ -27,24 +33,13 @@ function mask($val, $mask)
     return $maskared;
 }
 
-//echo mask($cnpj, '##.###.###/####-##') . '<br>';
-//echo mask($cpf, '###.###.###-##') . '<br>';
-//echo mask($cep, '#####-###') . '<br>';
-//echo mask($data, '##/##/####') . '<br>';
-//echo mask($data, '##/##/####') . '<br>';
-//echo mask($data, '[##][##][####]') . '<br>';
-//echo mask($data, '(##)(##)(####)') . '<br>';
-//echo mask($hora, 'Agora são ## horas ## minutos e ## segundos') . '<br>';
-//echo mask($hora, '##:##:##');
-
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-
+    <link rel="stylesheet" href="src/css/removeAds.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="src/css/style.css" />
@@ -123,7 +118,6 @@ function mask($val, $mask)
             <?php } ?>
         </div>
     </div>
-
 </body>
 
 </html>

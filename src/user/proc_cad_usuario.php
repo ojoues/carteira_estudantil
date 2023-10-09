@@ -3,11 +3,11 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-	header("Location: ../../login.php");
+	header("Location: ../../login");
 	exit();
 }
 
-include_once("../../conexao.php");
+include_once("../../conexao");
 
 $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -23,7 +23,7 @@ mysqli_stmt_store_result($stmt_verificar);
 if (mysqli_stmt_num_rows($stmt_verificar) > 0) {
 	// O usuário já existe, redirecione de volta para a página de cadastro com uma mensagem de erro
 	$_SESSION['msg'] = "<p style='color:red;'>Usuário '$usuario' já existe</p>";
-	header("Location: cad_usuario.php");
+	header("Location: cad_usuario");
 	exit();
 }
 
@@ -39,11 +39,11 @@ if ($stmt) {
 
 	if ($resultado_usuario) {
 		$_SESSION['msg'] = "<p style='color:green;'>Usuário '$usuario' cadastrado com sucesso</p>";
-		header("Location: index.php");
+		header("Location: index");
 		exit();
 	} else {
 		$_SESSION['msg'] = "<p style='color:red;'>Usuário '$usuario' não foi cadastrado com sucesso</p>";
-		header("Location: cad_usuario.php");
+		header("Location: cad_usuario");
 		exit();
 	}
 

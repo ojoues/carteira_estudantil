@@ -3,8 +3,8 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: ../../login.php");
-    exit();
+	header("Location: ../../login");
+	exit();
 }
 
 include_once("../../conexao.php");
@@ -15,6 +15,7 @@ include_once("../../conexao.php");
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+	<link rel="stylesheet" href="../css/removeAds.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Listar Usuários</title>
 </head>
@@ -23,9 +24,11 @@ include_once("../../conexao.php");
 	<div class="container">
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-8">
-				<a href="cad_usuario.php" class="btn btn-primary">Cadastrar</a><br><br>
-				<a href="../../admin.php" class="btn btn-primary">Área administrativa</a><br><br>
+				<a href="cad_usuario" class="btn btn-primary">Cadastrar</a><br><br>
+				<a href="../../admin" class="btn btn-primary">Área administrativa</a><br><br>
 				<h1>Listar Usuários</h1>
+
+
 				<?php
 				if (isset($_SESSION['msg'])) {
 					echo $_SESSION['msg'];
@@ -42,7 +45,8 @@ include_once("../../conexao.php");
 				//calcular o inicio visualização
 				$inicio = ($qnt_result_pg * $pagina) - $qnt_result_pg;
 
-				$result_usuarios = "SELECT * FROM usuarios LIMIT $inicio, $qnt_result_pg";
+				$result_usuarios = "SELECT * FROM usuarios ORDER BY criado DESC LIMIT $inicio, $qnt_result_pg";
+
 				$resultado_usuarios = mysqli_query($conn, $result_usuarios);
 				while ($row_usuario = mysqli_fetch_assoc($resultado_usuarios)) {
 					echo "<hr>";
@@ -50,9 +54,11 @@ include_once("../../conexao.php");
 					echo "Nome: " . $row_usuario['nome'] . "<br>";
 					echo "Usuário: " . $row_usuario['usuario'] . "<br>";
 					echo "E-mail: " . $row_usuario['email'] . "<br>";
-					echo "<a href='edit_usuario.php?id=" . $row_usuario['id'] . "' class='btn btn-primary'>Editar</a>";
+					echo "<a href='edit_usuario?id=" . $row_usuario['id'] . "' class='btn btn-primary'>Editar</a>";
 					echo " ";
-					echo "<a href='proc_apagar_usuario.php?id=" . $row_usuario['id'] . "' class='btn btn-danger'>Apagar</a>";
+					echo "<a href='proc_apagar_usuario?id=" . htmlspecialchars($row_usuario['id'], ENT_QUOTES, 'UTF-8') . "' data-user-id='" . htmlspecialchars($row_usuario['id'], ENT_QUOTES, 'UTF-8') . "' class='btn btn-danger delete-button confirm-delete' data-nome='" . htmlspecialchars_decode(htmlspecialchars($row_usuario['nome'], ENT_QUOTES, 'UTF-8'), ENT_QUOTES) . "'>Apagar</a>";
+
+
 					echo "<hr>";
 				}
 
@@ -66,11 +72,11 @@ include_once("../../conexao.php");
 
 				//Limitar os link antes depois
 				$max_links = 2;
-				echo "<a href='index.php?pagina=1'>Primeira</a> ";
+				echo "<a href='index?pagina=1'>Primeira</a> ";
 
 				for ($pag_ant = $pagina - $max_links; $pag_ant <= $pagina - 1; $pag_ant++) {
 					if ($pag_ant >= 1) {
-						echo "<a href='index.php?pagina=$pag_ant'>$pag_ant</a> ";
+						echo "<a href='index?pagina=$pag_ant'>$pag_ant</a> ";
 					}
 				}
 
@@ -78,16 +84,17 @@ include_once("../../conexao.php");
 
 				for ($pag_dep = $pagina + 1; $pag_dep <= $pagina + $max_links; $pag_dep++) {
 					if ($pag_dep <= $quantidade_pg) {
-						echo "<a href='index.php?pagina=$pag_dep'>$pag_dep</a> ";
+						echo "<a href='index?pagina=$pag_dep'>$pag_dep</a> ";
 					}
 				}
 
-				echo "<a href='index.php?pagina=$quantidade_pg'>Última</a>";
+				echo "<a href='index?pagina=$quantidade_pg'>Última</a>";
 
 				?>
 			</div>
 		</div>
 	</div>
+	<script src="../js/confirmaExcluirUsuario.js"></script>
 </body>
 
 </html>

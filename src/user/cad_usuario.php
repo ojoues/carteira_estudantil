@@ -3,7 +3,7 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-	header("Location: ../../login.php");
+	header("Location: ../../login");
 	exit();
 }
 
@@ -16,7 +16,7 @@ include_once("../../conexao.php");
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-
+	<link rel="stylesheet" href="../css/removeAds.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Cadastro de Usuário</title>
 </head>
@@ -26,8 +26,8 @@ include_once("../../conexao.php");
 	<div class="container">
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-6">
-				<a href="index.php" class="btn btn-primary">Listar</a><br><br>
-				<a href="../../admin.php" class="btn btn-primary">Área administrativa</a><br><br>
+				<a href="index" class="btn btn-primary">Listar Usuários</a><br><br>
+				<a href="../../admin" class="btn btn-primary">Área administrativa</a><br><br>
 				<div class="card">
 					<div class="card-header">Cadastro de usuário</div>
 					<?php
@@ -37,7 +37,7 @@ include_once("../../conexao.php");
 					}
 					?>
 					<div class="card-body">
-						<form method="POST" action="proc_cad_usuario.php">
+						<form method="POST" action="proc_cad_usuario">
 
 							<div class="form-group">
 								<label for="nome">Nome: </label>
@@ -72,7 +72,6 @@ include_once("../../conexao.php");
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-	<script src="../../src/js/script.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 

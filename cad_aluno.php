@@ -3,7 +3,7 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-	header("Location: login.php");
+	header("Location: login");
 	exit();
 }
 
@@ -27,7 +27,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-
+	<link rel="stylesheet" href="src/css/removeAds.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<title>Cadastro de Aluno</title>
@@ -38,8 +38,8 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-6">
 
-				<a href="excluir_aluno.php" class="btn btn-primary">Listar</a><br><br>
-				<a href="admin.php" class="btn btn-primary">Área administrativa</a><br><br>
+				<a href="excluir_aluno" class="btn btn-primary">Listar</a><br><br>
+				<a href="admin" class="btn btn-primary">Área administrativa</a><br><br>
 				<div class="card">
 					<div class="card-header">Cadastro de aluno</div>
 					<?php
@@ -49,7 +49,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 					}
 					?>
 					<div class="card-body">
-						<form method="POST" action="processa.php" enctype="multipart/form-data">
+						<form method="POST" action="processa" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="nome">Nome:</label>
 								<input type="text" class="form-control" name="nome" maxlength="220" placeholder="Ex.: João Paulo" required>
@@ -78,7 +78,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 
 							<div class="form-group">
 								<label for="cpf">CPF:</label>
-								<input type="text" class="form-control" name="cpf" maxlength="14" oninput="formatarCpf(this)" placeholder="___.___.___-__" required>
+								<input type="text" class="form-control" name="cpf" maxlength="11" placeholder="___.___.___-__" required>
 							</div>
 
 							<label for="validade">Validade:</label>
@@ -95,7 +95,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 							</div>
 							<button type="submit" name="btnLogin" class="btn btn-primary" value="Acessar">Cadastrar</button><br><br>
 
-							<a href="admin.php">Voltar</a>
+							<a href="admin">Voltar</a>
 						</form>
 					</div>
 				</div>
@@ -108,7 +108,6 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-	<script src="src/js/script.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 

@@ -3,7 +3,7 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-	header("Location: ../../login.php");
+	header("Location: ../../login");
 	exit();
 }
 
@@ -20,6 +20,7 @@ $row_usuario = mysqli_fetch_assoc($resultado_usuario);
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+	<link rel="stylesheet" href="../css/removeAds.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Editar Usuário</title>
 </head>
@@ -28,8 +29,8 @@ $row_usuario = mysqli_fetch_assoc($resultado_usuario);
 	<div class="container">
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-6">
-				<a href="cad_usuario.php" class="btn btn-primary">Cadastrar</a><br><br>
-				<a href="index.php" class="btn btn-primary">Listar</a><br><br>
+				<a href="cad_usuario" class="btn btn-primary">Cadastrar</a><br><br>
+				<a href="index" class="btn btn-primary">Listar Usuários</a><br><br>
 				<div class="card">
 					<div class="card-header">Editar usuário</div>
 					<?php
@@ -39,7 +40,7 @@ $row_usuario = mysqli_fetch_assoc($resultado_usuario);
 					}
 					?>
 					<div class="card-body">
-						<form method="POST" action="proc_edit_usuario.php">
+						<form method="POST" action="proc_edit_usuario">
 							<input type="hidden" name="id" value="<?php echo $row_usuario['id']; ?>">
 
 							<div class="form-group">

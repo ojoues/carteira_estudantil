@@ -3,7 +3,7 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: login.php");
+    header("Location: login");
     exit();
 }
 ?>
@@ -13,7 +13,7 @@ if (!isset($_SESSION['usuario_id'])) {
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-
+    <link rel="stylesheet" href="src/css/removeAds.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Área administrativa</title>
@@ -26,11 +26,11 @@ if (!isset($_SESSION['usuario_id'])) {
                 <div class="card">
                     <div class="card-header">Área Administrativa</div>
                     <div class="card-body">
-                        <a href="cad_aluno.php">Cadastrar aluno</a><br><br>
-                        <a href="excluir_aluno.php">Listar cadastros de alunos</a><br><br>
-                        <a href="./src/user/cad_usuario.php">Cadastrar usuário</a><br><br>
-                        <a href="./src/user/index.php">Listar cadastros de usuários</a><br><br>
-                        <a href="sair.php">Sair</a>
+                        <a href="cad_aluno">Cadastrar aluno</a><br><br>
+                        <a href="excluir_aluno">Listar cadastros de alunos</a><br><br>
+                        <a href="./src/user/cad_usuario">Cadastrar usuário</a><br><br>
+                        <a href="./src/user/index">Listar cadastros de usuários</a><br><br>
+                        <a href="sair">Sair</a>
                     </div>
                 </div>
             </div>
