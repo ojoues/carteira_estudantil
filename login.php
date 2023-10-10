@@ -35,7 +35,7 @@ session_start();
                                 <label for="senha">Senha:</label>
                                 <input type="password" class="form-control" name="senha" required>
                             </div>
-                            <button type="submit" name="btnLogin" class="btn btn-primary" value="Acessar">Entrar</button>
+                            <button type="submit" name="btnLogin" class="btn btn-primary btn-block" value="Acessar">Entrar</button>
                         </form>
                     </div>
                 </div>
