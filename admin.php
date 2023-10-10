@@ -25,15 +25,12 @@ $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Área Administrativa</a>
+        <span class="navbar-brand"><?php echo $usuario_nome; ?></span><!-- Esta será exibida apenas em telas pequenas -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <span class="nav-link">Bem-vindo, <?php echo $usuario_nome; ?></span>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="sair">Sair</a>
                 </li>
@@ -45,7 +42,7 @@ $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "
         <div class="row justify-content-center mt-5">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">Gerenciamento de alunos e usuários</div>
+                    <div class="card-header">Área Administrativa</div>
                     <div class="card-body">
                         <a href="cad_aluno">Cadastrar aluno(a)</a><br><br>
                         <a href="excluir_aluno">Listar cadastros de alunos(as)</a><br><br>
