@@ -56,7 +56,7 @@ if (!isset($_SESSION['usuario_id'])) {
 						echo "CPF: " . substr($row['cpf'], 0, 3) . '.' . substr($row['cpf'], 3, 3) . '.' . substr($row['cpf'], 6, 3) . '-' . substr($row['cpf'], 9, 2) . "<br>";
 						echo "<a href='edit_aluno?id=" . $row['id'] . "' class='btn btn-primary'>Editar</a>";
 						echo " ";
-						echo "<a href='proc_apagar_aluno?id=" . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . "' class='btn btn-danger delete-button confirm-delete' data-nome='" . htmlspecialchars($row['nome'], ENT_QUOTES, 'UTF-8') . "'>Apagar</a>";
+						echo "<a href='proc_apagar_aluno?id=" . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . "' class='btn btn-danger delete-button confirm-delete' data-nome='" . html_entity_decode($row['nome'], ENT_QUOTES, 'UTF-8') . "'>Apagar</a>";
 
 						echo " ";
 						echo "<a href='pesquisar?aluno=" . $row['id'] . "' class='btn btn-success' target='_blank'>Visualizar</a>";
