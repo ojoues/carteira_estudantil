@@ -32,30 +32,31 @@ if (isset($_GET['id'])) {
     // Executar a QUERY
     $result_estudante->execute();
 
-    // Informacoes para o PDF
-    $dados = "<!DOCTYPE html>";
-    $dados .= "<html lang='pt-br'>";
-    $dados .= "<head>";
-    $dados .= "<meta charset='UTF-8'>";
-    $dados .= "<title>Carteira Estudantil</title>";
-    $dados .= "<link rel='stylesheet' href='style.css'>"; // Inclua aqui o caminho correto para o arquivo CSS externo
-    $dados .= "<style>";
-    $dados .= "</style>";
-    $dados .= "</head>";
-    $dados .= "<body>";
-
     // Ler o registro do estudante retornado do BD
     $row_estudante = $result_estudante->fetch(PDO::FETCH_ASSOC);
 
     if ($row_estudante) {
-        $imagemAbsoluta = $_SERVER['DOCUMENT_ROOT'] . $row_estudante['imagem'];
+        // Informacoes para o PDF
+        $dados = "<!DOCTYPE html>";
+        $dados .= "<html lang='pt-br'>";
+        $dados .= "<head>";
+        $dados .= "<meta charset='UTF-8'>";
+        $dados .= "<title>Carteira Estudantil</title>";
+        $dados .= "<style>";
+        $dados .= "</style>";
+        $dados .= "</head>";
+        $dados .= "<body>";
+
+        // Ajuste o caminho relativo para a imagem
+        $imagemRelativa = '../img/uploads/' . basename($row_estudante['imagem']);
 
         $dados .= "<div class='left-column'>";
         $dados .= "</div>";
         $dados .= "<div class='right-column'>";
         $dados .= "<h1>DNE</h1>";
         $dados .= "<h4>Documento Nacional do Estudante</h4>";
-        $dados .= "<img src='" . $imagemAbsoluta . "'><br>";
+        $dados .= "<img src='" . $imagemRelativa . "'><br>";
+        $dados .= "$imagemRelativa<br>";
         $dados .= "Nome: " . $row_estudante['nome'] . "<br>";
         $dados .= "Instituição de Ensino: " . $row_estudante['instituicao'] . "<br>";
         $dados .= "Curso/Série: " . $row_estudante['curso'] . "<br>";
@@ -83,30 +84,26 @@ if (isset($_GET['id'])) {
         $dados .= "Documento padronizado nacionalmente conforme a Lei 12.933/2013<br>";
         $dados .= "Válido em todo território nacional até o mês de ano";
         $dados .= "</div>";
-    } else {
-        $dados .= "<p>Estudante não encontrado.</p>";
-    }
 
-    $dados .= "</body>";
-    $dados .= "</html>";
+        $dados .= "</body>";
+        $dados .= "</html>";
 
-    // Instanciar e usar a classe dompdf
-    $dompdf = new Dompdf(['enable_remote' => true]);
+        // Instanciar e usar a classe dompdf
+        $dompdf = new Dompdf(['enable_remote' => true]);
 
-    // Instanciar o método loadHtml e enviar o conteúdo do PDF
-    $dompdf->loadHtml($dados);
+        // Instanciar o método loadHtml e enviar o conteúdo do PDF
+        $dompdf->loadHtml($dados);
 
-    // Configurar o tamanho e a orientação do papel para portrait (retrato)
-    $dompdf->setPaper('A4', 'landscape');
+        // Configurar o tamanho e a orientação do papel para portrait (retrato)
+        $dompdf->setPaper('A4', 'landscape');
 
-    // Renderizar o HTML como PDF
-    $dompdf->render();
+        // Renderizar o HTML como PDF
+        $dompdf->render();
 
-    if ($row_estudante) { // Verificar se o estudante foi encontrado
         // Gerar o PDF e especificar o nome do arquivo
         $dompdf->stream("Carteira Estudantil (" . $row_estudante['id'] . ").pdf");
     } else {
-        echo "<p>ID do estudante não fornecido.</p>";
+        echo "<p>Estudante não encontrado.</p>";
     }
 } else {
     echo "<p>ID do estudante não fornecido.</p>";

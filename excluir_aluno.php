@@ -61,7 +61,7 @@ if (!isset($_SESSION['usuario_id'])) {
 						echo " ";
 						echo "<a href='pesquisar?aluno=" . $row['id'] . "' class='btn btn-success' target='_blank'>Visualizar</a>";
 						echo " ";
-						echo "<a href='src/dompdf/gerar_pdf?id=" . $row['id'] . "' class='btn btn-info' target='_blank'>Gerar PDF</a>";
+						echo "<a href='src/dompdf/gerar_pdf?id=" . $row['id'] . "' class='btn btn-info'>Gerar PDF</a>";
 						echo "<hr>";
 					}
 				} else {
