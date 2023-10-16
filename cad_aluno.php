@@ -52,11 +52,11 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 						<form method="POST" action="processa" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="nome">Nome:</label>
-								<input type="text" class="form-control" name="nome" maxlength="220" placeholder="Ex.: João Paulo" required>
+								<input type="text" class="form-control" name="nome" id="nome" maxlength="220" placeholder="Ex.: João Paulo" required autofocus>
 							</div>
 							<div class="form-group">
-								<label for="email">Data de Nascimento:</label>
-								<input type="date" class="form-control" name="data_nascimento" maxlength="8" required>
+								<label for="data_nascimento">Data de Nascimento:</label>
+								<input type="date" class="form-control" name="data_nascimento" id="data_nascimento" maxlength="8" required>
 							</div>
 
 							<label for="sexo">Gênero:</label>
@@ -69,16 +69,16 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 
 							<div class="form-group">
 								<label for="instituicao">Instituição:</label>
-								<input type="text" class="form-control" name="instituicao" maxlength="220" placeholder="Instituição" required>
+								<input type="text" class="form-control" name="instituicao" id="instituicao" maxlength="220" placeholder="Instituição" required>
 							</div>
 							<div class="form-group">
 								<label for="curso">Curso:</label>
-								<input type="text" class="form-control" name="curso" maxlength="220" placeholder="Curso" required>
+								<input type="text" class="form-control" name="curso" id="curso" maxlength="220" placeholder="Curso" required>
 							</div>
 
 							<div class="form-group">
 								<label for="cpf">CPF:</label>
-								<input type="text" class="form-control" name="cpf" maxlength="11" placeholder="___.___.___-__" required>
+								<input type="text" class="form-control" name="cpf" id="cpf" maxlength="11" placeholder="___.___.___-__" required>
 							</div>
 
 							<label for="validade">Validade:</label>
@@ -91,7 +91,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 
 							<div class="form-group">
 								<label for="imagem">Foto do Aluno:</label>
-								<input type="file" class="form-control-file" name="imagem" accept=".jpg, .jpeg" required>
+								<input type="file" class="form-control-file" name="imagem" id="imagem" accept=".jpg, .jpeg" required>
 							</div>
 							<button type="submit" name="btnLogin" class="btn btn-primary" value="Acessar">Cadastrar</button><br><br>
 

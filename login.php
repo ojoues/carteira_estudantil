@@ -29,7 +29,7 @@ session_start();
                         <form method="POST" action="valida">
                             <div class="form-group">
                                 <label for="usuario">Usuário:</label>
-                                <input type="text" class="form-control" name="usuario" required>
+                                <input type="text" class="form-control" name="usuario" id="usuario" required autofocus>
                             </div>
                             <div class="form-group">
                                 <label for="senha">Senha:</label>

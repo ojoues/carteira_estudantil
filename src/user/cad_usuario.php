@@ -41,22 +41,22 @@ include_once("../../conexao.php");
 
 							<div class="form-group">
 								<label for="nome">Nome: </label>
-								<input type="text" class="form-control" name="nome" placeholder="Digite o nome completo" required><br><br>
+								<input type="text" class="form-control" name="nome" id="nome" placeholder="Digite o nome completo" required autofocus><br><br>
 							</div>
 
 							<div class="form-group">
 								<label for="email">E-mail: </label>
-								<input type="email" class="form-control" name="email" placeholder="Digite o seu e-mail" required><br><br>
+								<input type="email" class="form-control" name="email" id="email" placeholder="Digite o seu e-mail" required><br><br>
 							</div>
 
 							<div class="form-group">
 								<label for="usuario">Usuário: </label>
-								<input type="text" class="form-control" name="usuario" placeholder="Digite o seu usuário" required><br><br>
+								<input type="text" class="form-control" name="usuario" id="usuario" placeholder="Digite o seu usuário" required><br><br>
 							</div>
 
 							<div class="form-group">
 								<label for="senha">Senha: </label>
-								<input type="password" class="form-control" name="senha" placeholder="Digite a sua senha" required><br><br>
+								<input type="password" class="form-control" name="senha" id="senha" placeholder="Digite a sua senha" required><br><br>
 							</div>
 
 							<input type="submit" class="btn btn-primary" value="Cadastrar">
