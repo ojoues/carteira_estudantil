@@ -1,3 +1,13 @@
+:root {
+  --body-bg: #ffffff;
+  --body-color: #000000;
+}
+
+.dark-mode:root {
+  --body-bg: #212529;
+  --body-color: #fafafa;
+}
+
 .alert {
   padding: 20px;
   color: white;

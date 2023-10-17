@@ -26,7 +26,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 	<link rel="stylesheet" href="src/css/removeAds.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -38,7 +38,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-6">
 
-				<a href="excluir_aluno" class="btn btn-primary">Listar</a><br><br>
+				<a href="excluir_aluno" class="btn btn-primary">Listar Alunos</a><br><br>
 				<a href="admin" class="btn btn-primary">Área administrativa</a><br><br>
 				<div class="card">
 					<div class="card-header">Cadastro de aluno</div>
@@ -53,46 +53,49 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 							<div class="form-group">
 								<label for="nome">Nome:</label>
 								<input type="text" class="form-control" name="nome" id="nome" maxlength="220" placeholder="Ex.: João Paulo" required autofocus>
-							</div>
+							</div><br>
+
 							<div class="form-group">
 								<label for="data_nascimento">Data de Nascimento:</label>
 								<input type="date" class="form-control" name="data_nascimento" id="data_nascimento" maxlength="8" required>
-							</div>
+							</div><br>
 
 							<label for="sexo">Gênero:</label>
 							<select class="custom-select my-1 mr-sm-2" name="sexo" id="sexo" required>
 								<option selected>Selecione...</option>
 								<option value="0">Feminino</option>
 								<option value="1">Masculino</option>
-							</select>
+							</select><br><br>
 
 
 							<div class="form-group">
 								<label for="instituicao">Instituição:</label>
 								<input type="text" class="form-control" name="instituicao" id="instituicao" maxlength="220" placeholder="Instituição" required>
-							</div>
+							</div><br>
+
 							<div class="form-group">
 								<label for="curso">Curso:</label>
 								<input type="text" class="form-control" name="curso" id="curso" maxlength="220" placeholder="Curso" required>
-							</div>
+							</div><br>
 
 							<div class="form-group">
 								<label for="cpf">CPF:</label>
 								<input type="text" class="form-control" name="cpf" id="cpf" maxlength="11" placeholder="___.___.___-__" required>
-							</div>
+							</div><br>
 
 							<label for="validade">Validade:</label>
 							<select class="custom-select my-1 mr-sm-2" id="validade" name="validade" required>
 								<option selected>Selecione...</option>
 								<option value="0">Documento Inválido</option>
 								<option value="1">Documento Válido</option>
-							</select>
+							</select><br><br>
 
 
 							<div class="form-group">
 								<label for="imagem">Foto do Aluno:</label>
 								<input type="file" class="form-control-file" name="imagem" id="imagem" accept=".jpg, .jpeg" required>
-							</div>
+							</div><br>
+
 							<button type="submit" name="btnLogin" class="btn btn-primary" value="Acessar">Cadastrar</button><br><br>
 
 							<a href="admin">Voltar</a>
@@ -103,12 +106,14 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 		</div>
 	</div>
 
-	<!-- Inclua os scripts do Bootstrap no final da página, antes do fechamento da tag </body> -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<?php
+	include('dark_mode.php');
+	?>
 </body>
 
 </html>

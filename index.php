@@ -4,11 +4,13 @@
 <head>
   <title>Consultar Aluno</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="src/css/removeAds.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="stylesheet" href="src/css/style.css" />
+  <!-- Inclua a biblioteca Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
   <script>
     // JavaScript function to hide the error message after 3 seconds
@@ -25,21 +27,17 @@
 
 <body onload="hideErrorMessage();">
   <div class="container">
+
     <form class="form-control ajuste-form-control" action="pesquisar" method="GET">
       <label for="aluno">Identificação do aluno:</label>
       <input type="text" id="aluno" name="aluno" required="required" onkeypress="return isNumberKey(event)" placeholder="Apenas números" /><br />
       <input type="submit" class="btn btn-primary" value="Procurar Aluno" />
     </form>
 
-    <script>
-      function isNumberKey(evt) {
-        var charCode = (evt.which) ? evt.which : event.keyCode;
-        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-          return false;
-        }
-        return true;
-      }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <!--Impedir letras (apenas números)-->
+    <script src="src/js/numberKey.js"></script>
 
     <?php
     // Check if the mensagem query parameter is set
@@ -47,6 +45,10 @@
       $mensagem = urldecode($_GET['mensagem']);
       echo '<div id="error-message" style="background-color: #ff5252;" class="alert alert-danger">' . $mensagem . '</div>';
     }
+    ?>
+
+    <?php
+    include('dark_mode.php');
     ?>
   </div>
 </body>
