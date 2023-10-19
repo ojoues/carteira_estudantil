@@ -7,6 +7,23 @@ if (!isset($_SESSION['usuario_id'])) {
 	exit();
 }
 
+// Verifique o tempo de inatividade permitido (em segundos)
+$inatividade_permitida = 600; // 30 minutos (pode ajustar conforme necessário)
+
+// Verifique se a sessão expirou devido à inatividade
+if (isset($_SESSION['ultimo_acesso']) && (time() - $_SESSION['ultimo_acesso']) > $inatividade_permitida) {
+	// Sessão expirou, redirecione o usuário para a página de login
+	session_destroy();
+	header("Location: ../../login");
+	exit();
+}
+
+// Atualize o tempo do último acesso
+$_SESSION['ultimo_acesso'] = time();
+
+// Obtém o nome do usuário logado, se estiver disponível na sessão
+$usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "Usuário Desconhecido";
+
 include_once("../../conexao.php");
 
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);

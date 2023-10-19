@@ -8,6 +8,23 @@ if (!isset($_SESSION['usuario_id'])) {
 	exit();
 }
 
+// Verifique o tempo de inatividade permitido (em segundos)
+$inatividade_permitida = 600; // 30 minutos (pode ajustar conforme necessário)
+
+// Verifique se a sessão expirou devido à inatividade
+if (isset($_SESSION['ultimo_acesso']) && (time() - $_SESSION['ultimo_acesso']) > $inatividade_permitida) {
+	// Sessão expirou, redirecione o usuário para a página de login
+	session_destroy();
+	header("Location: login");
+	exit();
+}
+
+// Atualize o tempo do último acesso
+$_SESSION['ultimo_acesso'] = time();
+
+// Obtém o nome do usuário logado, se estiver disponível na sessão
+$usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "Usuário Desconhecido";
+
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +42,7 @@ if (!isset($_SESSION['usuario_id'])) {
 	<div class="container">
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-8">
-				<a href="cad_aluno" class="btn btn-primary">Cadastrar</a><br><br>
+				<a href="cad_aluno" class="btn btn-primary">Cadastrar Aluno(a)</a><br><br>
 				<a href="admin" class="btn btn-primary">Área administrativa</a><br><br>
 				<h1>Alunos cadastrados</h1>
 
@@ -61,7 +78,7 @@ if (!isset($_SESSION['usuario_id'])) {
 						echo " ";
 						echo "<a href='pesquisar?aluno=" . $row['id'] . "' class='btn btn-success' target='_blank'>Visualizar</a>";
 						echo " ";
-						echo "<a href='src/dompdf/gerar_pdf?id=" . $row['id'] . "' class='btn btn-info'>Gerar PDF</a>";
+						echo "<a href='src/pdf_aluno/pdf_aluno?id=" . $row['id'] . "' class='btn btn-secondary' target='_blank'>Gerar PDF</a>";
 						echo "<hr>";
 					}
 				} else {

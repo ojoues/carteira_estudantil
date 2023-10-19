@@ -7,6 +7,23 @@ if (!isset($_SESSION['usuario_id'])) {
 	exit();
 }
 
+// Verifique o tempo de inatividade permitido (em segundos)
+$inatividade_permitida = 600; // 30 minutos (pode ajustar conforme necessário)
+
+// Verifique se a sessão expirou devido à inatividade
+if (isset($_SESSION['ultimo_acesso']) && (time() - $_SESSION['ultimo_acesso']) > $inatividade_permitida) {
+	// Sessão expirou, redirecione o usuário para a página de login
+	session_destroy();
+	header("Location: login");
+	exit();
+}
+
+// Atualize o tempo do último acesso
+$_SESSION['ultimo_acesso'] = time();
+
+// Obtém o nome do usuário logado, se estiver disponível na sessão
+$usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "Usuário Desconhecido";
+
 include_once("conexao.php");
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0; // Use intval para obter um valor inteiro
@@ -131,7 +148,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	</div>
 
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
 	<?php
 	include('dark_mode.php');

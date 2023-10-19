@@ -7,6 +7,20 @@ if (!isset($_SESSION['usuario_id'])) {
     exit();
 }
 
+// Verifique o tempo de inatividade permitido (em segundos)
+$inatividade_permitida = 600; // 30 minutos (pode ajustar conforme necessário)
+
+// Verifique se a sessão expirou devido à inatividade
+if (isset($_SESSION['ultimo_acesso']) && (time() - $_SESSION['ultimo_acesso']) > $inatividade_permitida) {
+    // Sessão expirou, redirecione o usuário para a página de login
+    session_destroy();
+    header("Location: login");
+    exit();
+}
+
+// Atualize o tempo do último acesso
+$_SESSION['ultimo_acesso'] = time();
+
 // Obtém o nome do usuário logado, se estiver disponível na sessão
 $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "Usuário Desconhecido";
 ?>
@@ -24,18 +38,17 @@ $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
-            <span class="navbar-brand"><?php echo $usuario_nome; ?></span><!-- Esta será exibida apenas em telas pequenas -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#"><?php echo $usuario_nome; ?></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="sair">Sair</a>
-                    </li>
-                </ul>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" aria-current="page" href="/">Início</a>
+                    <a class="nav-link" href="sair">Sair</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -57,9 +70,8 @@ $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "
         </div>
     </div>
 
-    <!-- Inclua os scripts do Bootstrap no final da página, antes do fechamento da tag </body> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
     <?php
     include('dark_mode.php');

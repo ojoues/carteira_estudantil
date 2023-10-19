@@ -7,6 +7,23 @@ if (!isset($_SESSION['usuario_id'])) {
 	exit();
 }
 
+// Verifique o tempo de inatividade permitido (em segundos)
+$inatividade_permitida = 600; // 10 minutos (pode ajustar conforme necessário)
+
+// Verifique se a sessão expirou devido à inatividade
+if (isset($_SESSION['ultimo_acesso']) && (time() - $_SESSION['ultimo_acesso']) > $inatividade_permitida) {
+	// Sessão expirou, redirecione o usuário para a página de login
+	session_destroy();
+	header("Location: ../../login");
+	exit();
+}
+
+// Atualize o tempo do último acesso
+$_SESSION['ultimo_acesso'] = time();
+
+// Obtém o nome do usuário logado, se estiver disponível na sessão
+$usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "Usuário Desconhecido";
+
 include_once("../../conexao.php");
 ?>
 <!DOCTYPE html>
@@ -24,7 +41,7 @@ include_once("../../conexao.php");
 	<div class="container">
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-8">
-				<a href="cad_usuario" class="btn btn-primary">Cadastrar</a><br><br>
+				<a href="cad_usuario" class="btn btn-primary">Cadastrar Usuário(a)</a><br><br>
 				<a href="../../admin" class="btn btn-primary">Área administrativa</a><br><br>
 				<h1>Listar Usuários</h1>
 

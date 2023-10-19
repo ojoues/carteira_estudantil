@@ -1,4 +1,12 @@
-// Function to toggle the Bootstrap theme
+// Função para atualizar o ícone com base no tema atual
+function updateThemeIcon() {
+    const currentTheme = document.documentElement.getAttribute("data-bs-theme");
+    const themeIcon = document.getElementById("theme-icon");
+    themeIcon.classList.toggle("fa-sun", currentTheme === "dark");
+    themeIcon.classList.toggle("fa-moon", currentTheme !== "dark");
+}
+
+// Função para alternar o tema
 function toggleBootstrapTheme() {
     const currentTheme = document.documentElement.getAttribute("data-bs-theme");
     if (currentTheme === "dark") {
@@ -9,13 +17,11 @@ function toggleBootstrapTheme() {
         document.cookie = "bootstrap-theme=dark; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
     }
 
-    // Alterna o ícone com base no tema
-    const themeIcon = document.getElementById("theme-icon");
-    themeIcon.classList.toggle("fa-moon", currentTheme === "dark");
-    themeIcon.classList.toggle("fa-sun", currentTheme !== "dark");
+    // Chama a função para atualizar o ícone
+    updateThemeIcon();
 }
 
-// Check for a saved theme preference in a cookie
+// Verifica o tema salvo em um cookie e define o tema da página
 const savedTheme = document.cookie.replace(/(?:(?:^|.*;\s*)bootstrap-theme\s*=\s*([^;]*).*$)|^.*$/, "$1");
 if (savedTheme === "dark") {
     document.documentElement.setAttribute("data-bs-theme", "dark");
@@ -26,3 +32,6 @@ if (savedTheme === "dark") {
 // Adiciona um evento de clique ao botão de alternância de tema
 const themeToggleBtn = document.getElementById("theme-toggle");
 themeToggleBtn.addEventListener("click", toggleBootstrapTheme);
+
+// Chama a função para atualizar o ícone ao carregar a página
+updateThemeIcon();
