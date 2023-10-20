@@ -18,6 +18,24 @@
 
     <div class="container">
         <?php
+
+        // Verifique o tempo de inatividade permitido (em segundos)
+        $inatividade_permitida = 600; // 30 minutos (pode ajustar conforme necessário)
+
+        // Verifique se a sessão expirou devido à inatividade
+        if (isset($_SESSION['ultimo_acesso']) && (time() - $_SESSION['ultimo_acesso']) > $inatividade_permitida) {
+            // Sessão expirou, redirecione o usuário para a página de login
+            session_destroy();
+            header("Location: ../../login");
+            exit();
+        }
+
+        // Atualize o tempo do último acesso
+        $_SESSION['ultimo_acesso'] = time();
+
+        // Obtém o nome do usuário logado, se estiver disponível na sessão
+        $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "Usuário Desconhecido";
+
         // Incluir conexão com BD
         include_once '../../conexao.php';
 
@@ -104,7 +122,7 @@
                 echo "<p class='texto-padrao maiusculo'>" . $sexoTexto . "</p>";
 
                 echo "<p class='subtitulo'>ID:</p>";
-                echo "<p class='texto-padrao maiusculo'>" . $id . "</p>";
+                echo "<p class='texto-padrao maiusculo'>" . (string)$id . "</p>";
 
                 // Formatar o CPF com a máscara
                 $cpfFormatado = substr($cpf, 0, 3) . '.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9, 2);
