@@ -23,7 +23,13 @@ git clone
 "> https://github.com/jmwho/carteira_estudantil.git
 </a>
 
-Crie um banco de dados MySQL e importe o arquivo database.sql para criar as tabelas necessárias.
+Crie um banco de dados MySQL (db_alunos) com as tabelas necessárias.
+
+Tabelas: estudante, usuarios.
+
+Estruturas
+estudante: id (int), nome, data_nascimento (date), sexo, instituicao, curso, cpf, validade, imagem, modificado (datetime), criado (datetime).
+usuario: id (int), nome, email, usuario, senha, modificado (datetime), criado (datetime).
 
 Configure as informações de conexão com o banco de dados no arquivo conexao.php.
 
