@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<div class="container">
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-6">
-				<a href="excluir_aluno" class="btn btn-primary">Listar</a><br><br>
+				<a href="excluir_aluno" class="btn btn-primary">Listar Alunos(as)</a><br><br>
 				<div class="card">
 					<div class="card-header">Editar cadastro de aluno</div>
 					<?php
@@ -98,48 +98,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 							<input type="hidden" name="id" value="<?php echo $row_usuario['id']; ?>">
 							<div class="form-group">
 								<label for="nome">Nome:</label>
-								<input type="text" class="form-control" name="nome" maxlength="220" value="<?php echo $row_usuario['nome']; ?>" required>
+								<input type="text" class="form-control" name="nome" maxlength="220" value="<?php echo $row_usuario['nome']; ?>" required><br>
 							</div>
 							<div class="form-group">
 								<label for="email">Data de Nascimento:</label>
-								<input type="date" class="form-control" name="data_nascimento" maxlength="8" value="<?php echo $row_usuario['data_nascimento']; ?>" required>
+								<input type="date" class="form-control" name="data_nascimento" maxlength="8" value="<?php echo $row_usuario['data_nascimento']; ?>" required><br>
 							</div>
 
 							<label for="sexo">Gênero:</label>
 							<select class="custom-select my-1 mr-sm-2" name="sexo" id="sexo" required>
 								<option value="0" <?php if ($row_usuario['sexo'] == '0') echo 'selected'; ?>>Feminino</option>
 								<option value="1" <?php if ($row_usuario['sexo'] == '1') echo 'selected'; ?>>Masculino</option>
-							</select>
-
+							</select><br><br>
 
 							<div class="form-group">
 								<label for="instituicao">Instituição:</label>
-								<input type="text" class="form-control" name="instituicao" maxlength="220" value="<?php echo $row_usuario['instituicao']; ?>" required>
+								<input type="text" class="form-control" name="instituicao" maxlength="220" value="<?php echo $row_usuario['instituicao']; ?>" required><br>
 							</div>
+
 							<div class="form-group">
 								<label for="curso">Curso:</label>
-								<input type="text" class="form-control" name="curso" maxlength="220" value="<?php echo $row_usuario['curso']; ?>" required>
+								<input type="text" class="form-control" name="curso" maxlength="220" value="<?php echo $row_usuario['curso']; ?>" required><br>
 							</div>
 
 							<div class="form-group">
 								<label for="cpf">CPF:</label>
-								<input type="text" class="form-control" name="cpf" maxlength="11" value="<?php echo $row_usuario['cpf']; ?>" required>
+								<input type="text" class="form-control" name="cpf" maxlength="11" value="<?php echo $row_usuario['cpf']; ?>" required><br>
 							</div>
 
 							<label for="validade">Validade:</label>
 							<select class="custom-select my-1 mr-sm-2" name="validade" id="validade" required>
 								<option value="0" <?php if ($row_usuario['validade'] == '0') echo 'selected'; ?>>Documento Inválido</option>
 								<option value="1" <?php if ($row_usuario['validade'] == '1') echo 'selected'; ?>>Documento Válido</option>
-							</select>
+							</select><br>
 
 							<div class="form-group">
-								<label for="imagem">Imagem:</label>
-								<input type="file" class="form-control-file" name="imagem" accept=".jpg, .jpeg">
+								<label for="imagem">Imagem:</label><br>
+								<input type="file" class="form-control-file" name="imagem" accept=".jpg, .jpeg"><br><br>
 							</div>
 
 							<button type="submit" class="btn btn-primary" value="Corrigir">Corrigir</button><br><br>
-
-							<a href="admin">Voltar</a>
 						</form>
 					</div>
 				</div>
@@ -147,6 +145,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		</div>
 	</div>
 
+	<br>
+	<br>
 
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>

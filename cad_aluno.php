@@ -109,13 +109,11 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 
 
 							<div class="form-group">
-								<label for="imagem">Foto do Aluno:</label>
+								<label for="imagem">Foto do Aluno:</label><br>
 								<input type="file" class="form-control-file" name="imagem" id="imagem" accept=".jpg, .jpeg" required>
 							</div><br>
 
 							<button type="submit" name="btnLogin" class="btn btn-primary" value="Acessar">Cadastrar</button><br><br>
-
-							<a href="admin">Voltar</a>
 						</form>
 					</div>
 				</div>
@@ -123,6 +121,8 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 		</div>
 	</div>
 
+	<br>
+	<br>
 
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>

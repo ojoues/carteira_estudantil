@@ -46,8 +46,8 @@ $row_usuario = mysqli_fetch_assoc($resultado_usuario);
 	<div class="container">
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-6">
-				<a href="cad_usuario" class="btn btn-primary">Cadastrar</a><br><br>
-				<a href="index" class="btn btn-primary">Listar Usuários</a><br><br>
+				<a href="cad_usuario" class="btn btn-primary">Cadastrar novo Usuário(a)</a><br><br>
+				<a href="index" class="btn btn-primary">Listar Usuários(as)</a><br><br>
 				<div class="card">
 					<div class="card-header">Editar usuário</div>
 					<?php
@@ -62,22 +62,22 @@ $row_usuario = mysqli_fetch_assoc($resultado_usuario);
 
 							<div class="form-group">
 								<label>Nome: </label>
-								<input type="text" name="nome" class="form-control" placeholder="Digite o nome completo" value="<?php echo $row_usuario['nome']; ?>"><br><br>
+								<input type="text" name="nome" class="form-control" placeholder="Digite o nome completo" value="<?php echo $row_usuario['nome']; ?>"><br>
 							</div>
 
 							<div class="form-group">
 								<label>Usuário: </label>
-								<input type="text" name="usuario" class="form-control" placeholder="Digite o seu usuário" value="<?php echo $row_usuario['usuario']; ?>"><br><br>
+								<input type="text" name="usuario" class="form-control" placeholder="Digite o seu usuário" value="<?php echo $row_usuario['usuario']; ?>"><br>
 							</div>
 
 							<div class="form-group">
 								<label>E-mail: </label>
-								<input type="email" name="email" class="form-control" placeholder="Digite o seu e-mail" value="<?php echo $row_usuario['email']; ?>"><br><br>
+								<input type="email" name="email" class="form-control" placeholder="Digite o seu e-mail" value="<?php echo $row_usuario['email']; ?>"><br>
 							</div>
 
 							<div class="form-group">
 								<label>Nova Senha: </label>
-								<input type="password" name="nova_senha" class="form-control" placeholder="Digite a nova senha"><br><br>
+								<input type="password" name="nova_senha" class="form-control" placeholder="Digite a nova senha"><br>
 							</div>
 
 							<input type="submit" class="btn btn-primary" value="Corrigir">
@@ -88,6 +88,9 @@ $row_usuario = mysqli_fetch_assoc($resultado_usuario);
 		</div>
 	</div>
 	</div>
+
+	<br>
+	<br>
 
 	<?php
 	include('../../dark_mode.php');
