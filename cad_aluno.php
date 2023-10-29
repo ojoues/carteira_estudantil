@@ -51,12 +51,26 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 </head>
 
 <body>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container">
+			<a class="navbar-brand" href="#">Novo Cadastro</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-link" aria-current="page" href="excluir_aluno">Listar Alunos(as)</a>
+				</div>
+				<div class="navbar-nav">
+					<a class="nav-link" aria-current="page" href="admin">Área administrativa</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+
 	<div class="container">
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-6">
-
-				<a href="excluir_aluno" class="btn btn-primary">Listar Alunos(as)</a><br><br>
-				<a href="admin" class="btn btn-primary">Área administrativa</a><br><br>
 				<div class="card">
 					<div class="card-header">Cadastro de aluno</div>
 					<?php

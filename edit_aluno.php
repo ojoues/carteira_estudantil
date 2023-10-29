@@ -81,12 +81,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container">
+			<a class="navbar-brand" href="#">Editar Cadastro</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-link" aria-current="page" href="cad_aluno">Cadastrar novo Aluno(a)</a>
+					<a class="nav-link" href="excluir_aluno">Listar Usuários(as)</a>
+					<a class="nav-link" href="admin">Área Administrativa</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+
 	<div class="container">
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-6">
-				<a href="excluir_aluno" class="btn btn-primary">Listar Alunos(as)</a><br><br>
 				<div class="card">
-					<div class="card-header">Editar cadastro de aluno</div>
+					<div class="card-header">Editar Cadastro</div>
 					<?php
 					if (isset($_SESSION['msg'])) {
 						echo $_SESSION['msg'];

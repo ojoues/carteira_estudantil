@@ -39,11 +39,26 @@ $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "
 </head>
 
 <body>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container">
+			<a class="navbar-brand" href="#">Alunos Cadastrados</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-link" aria-current="page" href="cad_aluno">Cadastrar Aluno(a)</a>
+				</div>
+				<div class="navbar-nav">
+					<a class="nav-link" aria-current="page" href="admin">Área administrativa</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+
 	<div class="container">
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-8">
-				<a href="cad_aluno" class="btn btn-primary">Cadastrar Aluno(a)</a><br><br>
-				<a href="admin" class="btn btn-primary">Área administrativa</a><br><br>
 				<h1>Alunos cadastrados</h1>
 
 				<?php
@@ -52,7 +67,7 @@ $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "
 					unset($_SESSION['msg']);
 				}
 
-				$qnt_result_pg = 3;
+				$qnt_result_pg = 5;
 				$pagina_atual = filter_input(INPUT_GET, 'pagina', FILTER_SANITIZE_NUMBER_INT);
 				$pagina = (!empty($pagina_atual)) ? $pagina_atual : 1;
 				$inicio = ($qnt_result_pg * $pagina) - $qnt_result_pg;
@@ -120,7 +135,13 @@ $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "
 			</div>
 		</div>
 	</div>
+
+	<br>
+	<br>
 	<script src="src/js/confirmaExcluirAluno.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
 	<?php
 	include('dark_mode.php');
