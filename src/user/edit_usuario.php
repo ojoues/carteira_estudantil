@@ -76,7 +76,7 @@ $row_usuario = mysqli_fetch_assoc($resultado_usuario);
 
 							<div class="form-group">
 								<label>Nome: </label>
-								<input type="text" name="nome" class="form-control" placeholder="Digite o nome completo" value="<?php echo $row_usuario['nome']; ?>"><br>
+								<input type="text" name="nome" class="form-control" placeholder="Digite o nome completo" value="<?php echo $row_usuario['nome']; ?>" oninput="capitalizeFirstLetter(this)"><br>
 							</div>
 
 							<div class="form-group">
@@ -108,6 +108,8 @@ $row_usuario = mysqli_fetch_assoc($resultado_usuario);
 
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+	<script src="../js/capitalizeFirstLetter.js"></script>
 
 	<?php
 	include('../../dark_mode.php');

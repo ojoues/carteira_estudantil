@@ -83,7 +83,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 						<form method="POST" action="processa" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="nome">Nome:</label>
-								<input type="text" class="form-control" name="nome" id="nome" maxlength="220" placeholder="Ex.: João Paulo" required autofocus>
+								<input type="text" class="form-control" name="nome" id="nome" maxlength="220" placeholder="Ex.: João Paulo" oninput="capitalizeFirstLetter(this)" required autofocus>
 							</div><br>
 
 							<div class="form-group">
@@ -101,12 +101,12 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 
 							<div class="form-group">
 								<label for="instituicao">Instituição:</label>
-								<input type="text" class="form-control" name="instituicao" id="instituicao" maxlength="220" placeholder="Instituição" required>
+								<input type="text" class="form-control" name="instituicao" id="instituicao" maxlength="220" placeholder="Instituição" oninput="capitalizeFirstLetter(this)" required>
 							</div><br>
 
 							<div class="form-group">
 								<label for="curso">Curso:</label>
-								<input type="text" class="form-control" name="curso" id="curso" maxlength="220" placeholder="Curso" required>
+								<input type="text" class="form-control" name="curso" id="curso" maxlength="220" placeholder="Curso" oninput="capitalizeFirstLetter(this)" required>
 							</div><br>
 
 							<div class="form-group">
@@ -142,6 +142,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="src/js/capitalizeFirstLetter.js"></script>
 
 	<?php
 	include('dark_mode.php');

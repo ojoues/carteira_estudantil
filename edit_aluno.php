@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 							<input type="hidden" name="id" value="<?php echo $row_usuario['id']; ?>">
 							<div class="form-group">
 								<label for="nome">Nome:</label>
-								<input type="text" class="form-control" name="nome" maxlength="220" value="<?php echo $row_usuario['nome']; ?>" required><br>
+								<input type="text" class="form-control" name="nome" maxlength="220" value="<?php echo $row_usuario['nome']; ?>" oninput="capitalizeFirstLetter(this)" required><br>
 							</div>
 							<div class="form-group">
 								<label for="email">Data de Nascimento:</label>
@@ -128,12 +128,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 							<div class="form-group">
 								<label for="instituicao">Instituição:</label>
-								<input type="text" class="form-control" name="instituicao" maxlength="220" value="<?php echo $row_usuario['instituicao']; ?>" required><br>
+								<input type="text" class="form-control" name="instituicao" maxlength="220" value="<?php echo $row_usuario['instituicao']; ?>" oninput="capitalizeFirstLetter(this)" required><br>
 							</div>
 
 							<div class="form-group">
 								<label for="curso">Curso:</label>
-								<input type="text" class="form-control" name="curso" maxlength="220" value="<?php echo $row_usuario['curso']; ?>" required><br>
+								<input type="text" class="form-control" name="curso" maxlength="220" value="<?php echo $row_usuario['curso']; ?>" oninput="capitalizeFirstLetter(this)" required><br>
 							</div>
 
 							<div class="form-group">
@@ -165,6 +165,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+	<script src="src/js/capitalizeFirstLetter.js"></script>
 
 	<?php
 	include('dark_mode.php');
