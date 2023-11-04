@@ -34,6 +34,16 @@ function redimensionarImagem($caminho, $largura, $altura)
 	return $nova_imagem;
 }
 
+// Função para corrigir a orientação da imagem usando ImageMagick
+function corrigirOrientacaoImagem($caminho)
+{
+	if (extension_loaded('imagick')) {
+		$imagem = new Imagick($caminho);
+		$imagem->setImageOrientation(imagick::ORIENTATION_TOPLEFT);
+		$imagem->writeImage($caminho);
+	}
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$id = isset($_POST['id']) ? intval($_POST['id']) : 0;
 	$nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -57,11 +67,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 		// Move o arquivo para o diretório de uploads
 		if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_arquivo)) {
-			// Redimensione a imagem
-			$imagem_redimensionada = redimensionarImagem($caminho_arquivo, 995, 1293);
+			// Corrija a orientação da imagem usando ImageMagick
+			corrigirOrientacaoImagem($caminho_arquivo);
 
-			// Salve a imagem redimensionada no diretório de destino
-			imagejpeg($imagem_redimensionada, $caminho_arquivo);
+			// Redimensione a imagem
+			redimensionarImagem($caminho_arquivo, 995, 1293);
 
 			// Atualize o caminho da imagem no banco de dados
 			$atualiza_imagem = "UPDATE estudante SET imagem='$caminho_arquivo' WHERE id=$id";

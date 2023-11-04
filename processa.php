@@ -34,21 +34,15 @@ if (mysqli_stmt_execute($stmt)) {
 
 	// Move o arquivo original para o diretório de destino
 	if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_arquivo_original)) {
-		// Copiar a imagem original para um novo arquivo
-		$nome_arquivo = $id_aluno . ".jpg";
-		$caminho_arquivo = $diretorio_destino . $nome_arquivo;
-		copy($caminho_arquivo_original, $caminho_arquivo);
+		// Corrija a orientação da imagem usando ImageMagick
+		corrigirOrientacaoImagem($caminho_arquivo_original);
 
-		// Redimensionar a imagem
-		$imagem_redimensionada = redimensionarImagem($caminho_arquivo, 995, 1293);
+		// Renomeie a imagem redimensionada
+		$novo_nome_arquivo = $id_aluno . ".jpg";
+		$caminho_arquivo = $diretorio_destino . $novo_nome_arquivo;
 
-		// Salvar a imagem redimensionada no diretório de destino
-		imagejpeg($imagem_redimensionada, $caminho_arquivo);
-
-		// Excluir a imagem original
-		if (file_exists($caminho_arquivo_original)) {
-			unlink($caminho_arquivo_original);
-		}
+		// Renomeie o arquivo
+		rename($caminho_arquivo_original, $caminho_arquivo);
 
 		// Atualize o campo de imagem com o nome do arquivo
 		$sql_update = "UPDATE estudante SET imagem = ? WHERE id = ?";
@@ -71,30 +65,8 @@ if (mysqli_stmt_execute($stmt)) {
 	header("Location: cad_aluno");
 }
 
-// Função para redimensionar a imagem
-function redimensionarImagem($caminho, $largura, $altura)
+// Função para corrigir a orientação da imagem usando ImageMagick
+function corrigirOrientacaoImagem($caminho)
 {
-	list($largura_original, $altura_original) = getimagesize($caminho);
-	$nova_imagem = imagecreatetruecolor($largura, $altura);
-
-	$imagem_original = imagecreatefromjpeg($caminho);
-
-	// Calcula as proporções
-	$proporcao = $largura / $altura;
-
-	$nova_largura = $largura_original;
-	$nova_altura = $altura_original;
-
-	if ($largura_original / $altura_original > $proporcao) {
-		$nova_largura = $altura_original * $proporcao;
-	} else {
-		$nova_altura = $largura_original / $proporcao;
-	}
-
-	$deslocamento_x = ($largura_original - $nova_largura) / 2;
-	$deslocamento_y = ($altura_original - $nova_altura) / 2;
-
-	imagecopyresampled($nova_imagem, $imagem_original, 0, 0, $deslocamento_x, $deslocamento_y, $largura, $altura, $nova_largura, $nova_altura);
-
-	return $nova_imagem;
+	exec("convert $caminho -auto-orient $caminho");
 }
