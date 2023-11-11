@@ -93,7 +93,7 @@ $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "
 						echo " ";
 						echo "<a href='pesquisar?aluno=" . $row['id'] . "' class='btn btn-success' target='_blank'>Visualizar</a>";
 						echo " ";
-						echo "<a href='src/pdf_aluno/pdf_aluno?id=" . $row['id'] . "' class='btn btn-secondary' target='_blank'>Gerar PDF</a>";
+						echo "<a href='pdf_aluno?id=" . $row['id'] . "' class='btn btn-secondary' target='_blank'>Gerar PDF</a>";
 						echo "<hr>";
 					}
 				} else {

@@ -19,8 +19,8 @@ Siga estas etapas para instalar o sistema em seu servidor:<br>
 Clone o repositório para o seu servidor web.
 
 git clone
-<a href="https://github.com/jmwho/carteira_estudantil.git
-"> https://github.com/jmwho/carteira_estudantil.git
+<a href="https://github.com/ojoues/carteira_estudantil.git
+"> https://github.com/ojoues/carteira_estudantil.git
 </a>
 
 Crie um banco de dados MySQL (db_alunos) com as tabelas necessárias.
@@ -48,6 +48,4 @@ date_default_timezone_set('America/Sao_Paulo');
 Se você deseja contribuir para o desenvolvimento deste sistema, sinta-se à vontade para criar um fork do repositório, fazer as alterações necessárias e enviar um pull request. Ficaremos felizes em revisar suas contribuições.<br><br>
 
 <h3>Suporte</h3>
-Se você encontrar problemas ou tiver dúvidas sobre o sistema, entre em contato conosco através do e-mail de suporte: <a href="mailto:marquesjosue81@gmail.com">marquesjosue81@gmail.com</a>.<br><br>
-
-Espero que este sistema de carteira estudantil em PHP seja útil para a sua instituição de ensino. Seu objetivo é simplificar a administração das carteiras estudantis e proporcionar benefícios aos estudantes. Se você tiver sugestões ou melhorias, não hesite em compartilhá-las. Boa sorte com a sua implementação!
+Se você encontrar problemas ou tiver dúvidas sobre o sistema, entre em contato conosco através do e-mail de suporte: <a href="mailto:ojoues@icloud.com">ojoues@icloud.com</a>.<br><br>

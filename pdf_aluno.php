@@ -10,8 +10,8 @@
     }
     ?>
     <title><?php echo $pageTitle; ?></title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="../css/removeAds.css">
+    <link rel="stylesheet" href="src/css/pdf_aluno.css">
+    <link rel="stylesheet" href="src/css/removeAds.css">
 </head>
 
 <body>
@@ -26,7 +26,7 @@
         if (isset($_SESSION['ultimo_acesso']) && (time() - $_SESSION['ultimo_acesso']) > $inatividade_permitida) {
             // Sessão expirou, redirecione o usuário para a página de login
             session_destroy();
-            header("Location: ../../login");
+            header("Location: login");
             exit();
         }
 
@@ -37,7 +37,7 @@
         $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "Usuário Desconhecido";
 
         // Incluir conexão com BD
-        include_once '../../conexao.php';
+        include_once 'conexao.php';
 
         // Array com os nomes dos meses em português
         $meses = array(
@@ -90,7 +90,7 @@
 
                 echo "<p class='titulo font-tailwind sombra inline-input cabecalho'>dne</p>";
                 echo "<p class='titulo2 font-tailwind sombra inline-input cabecalho2'>Documento<br>Nacional<br>do Estudante</p>";
-                echo "<img class='img-unec inline-input' src='img/unec.png'>";
+                echo "<img class='img-unec inline-input' src='src/img/pdf_aluno/unec.png'>";
 
                 echo "</div>";
 
@@ -98,7 +98,7 @@
 
                 echo "<div class='inline-input'>";
                 // Ajuste o caminho relativo para a imagem
-                $imagemRelativa = '../img/uploads/' . basename($imagem);
+                $imagemRelativa = 'src/img/uploads/' . basename($imagem);
                 echo "<img class='imagem-aluno sombra' src='" . $imagemRelativa . "'><br>";
                 echo "</div>";
 
@@ -176,9 +176,9 @@
                 echo "<br>";
 
                 echo "<div class='image-container'>";
-                echo "<img class='logo logo1' src='img/unec.png'>";
-                echo "<img class='logo logo2' src='img/prepara-cursos.png'>";
-                echo "<img class='logo logo3' src='img/ampla.png'>";
+                echo "<img class='logo logo1' src='src/img/pdf_aluno/unec.png'>";
+                echo "<img class='logo logo2' src='src/img/pdf_aluno/prepara-cursos.png'>";
+                echo "<img class='logo logo3' src='src/img/pdf_aluno/ampla.png'>";
                 echo "</div>";
 
                 echo "<div class='text-center'>";
