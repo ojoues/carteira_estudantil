@@ -10,7 +10,7 @@ $resultado_alunos = mysqli_query($conn, $result);
 
 // Verifica se há algum registro correspondente
 if (mysqli_num_rows($resultado_alunos) == 0) {
-    header("Location: index?mensagem=Aluno(a)%20não%20cadastrado(a)");
+    header("Location: /?mensagem=Aluno(a)%20não%20cadastrado(a)");
     exit;
 }
 
@@ -40,6 +40,7 @@ function mask($val, $mask)
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="src/css/removeAds.css">
+    <link rel="icon" type="image/x-icon" href="src/img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="src/css/style.css" />

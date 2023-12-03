@@ -33,6 +33,7 @@ include_once("../../conexao.php");
 	<meta charset="utf-8">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 	<link rel="stylesheet" href="../css/removeAds.css">
+	<link rel="icon" type="image/x-icon" href="../img/favicon.ico">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Listar Usuários</title>
 </head>
@@ -102,11 +103,11 @@ include_once("../../conexao.php");
 
 				//Limitar os link antes depois
 				$max_links = 2;
-				echo "<a href='index?pagina=1'>Primeira</a> ";
+				echo "<a href='?pagina=1'>Primeira</a> ";
 
 				for ($pag_ant = $pagina - $max_links; $pag_ant <= $pagina - 1; $pag_ant++) {
 					if ($pag_ant >= 1) {
-						echo "<a href='index?pagina=$pag_ant'>$pag_ant</a> ";
+						echo "<a href='?pagina=$pag_ant'>$pag_ant</a> ";
 					}
 				}
 
@@ -114,11 +115,11 @@ include_once("../../conexao.php");
 
 				for ($pag_dep = $pagina + 1; $pag_dep <= $pagina + $max_links; $pag_dep++) {
 					if ($pag_dep <= $quantidade_pg) {
-						echo "<a href='index?pagina=$pag_dep'>$pag_dep</a> ";
+						echo "<a href='?pagina=$pag_dep'>$pag_dep</a> ";
 					}
 				}
 
-				echo "<a href='index?pagina=$quantidade_pg'>Última</a>";
+				echo "<a href='?pagina=$quantidade_pg'>Última</a>";
 
 				?>
 			</div>

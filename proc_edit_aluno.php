@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	// Execute a consulta
 	if ($stmt->execute()) {
 		$_SESSION['msg'] = "<p style='color:green;'>Aluno(a) '$nome' editado com sucesso!</p>";
-		header("Location: excluir_aluno");
+		header("Location: aluno");
 	} else {
 		$_SESSION['msg'] = "<p style='color:red;'>Aluno(a) '$nome' não foi editado com sucesso!</p>";
 		header("Location: edit_aluno?id=$id");

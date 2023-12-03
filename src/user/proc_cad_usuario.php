@@ -7,7 +7,7 @@ if (!isset($_SESSION['usuario_id'])) {
 	exit();
 }
 
-include_once("../../conexao");
+include_once("../../conexao.php");
 
 $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);

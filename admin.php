@@ -32,6 +32,7 @@ $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="src/css/removeAds.css">
+    <link rel="icon" type="image/x-icon" href="src/img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Área administrativa</title>
@@ -58,14 +59,22 @@ $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">Área Administrativa</div>
-                    <div class="card-body">
-                        <a href="cad_aluno">Cadastrar aluno(a)</a><br><br>
-                        <a href="excluir_aluno">Listar cadastros de alunos(as)</a><br><br>
+                    <div class="card-body d-grid gap-2">
+                        <a class="btn btn-link" href="cad_aluno" style="margin-bottom:7px;">Cadastrar aluno(a)</a>
+                        <a class=" btn btn-link" href="aluno">Listar cadastros de alunos(as)</a>
                         <hr>
-                        <a href="./src/user/cad_usuario">Cadastrar usuário(a)</a><br><br>
-                        <a href="./src/user/index">Listar cadastros de usuários(as)</a><br><br>
+                        <a class=" btn btn-link" href="./src/user/cad_usuario" style="margin-bottom:7px;">Cadastrar usuário(a)</a>
+                        <a class="btn btn-link" href="./src/user/">Listar cadastros de usuários(as)</a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <!-- Seu conteúdo existente ... -->
             </div>
         </div>
     </div>
@@ -76,6 +85,7 @@ $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "
     <?php
     include('dark_mode.php');
     ?>
+
 </body>
 
 </html>

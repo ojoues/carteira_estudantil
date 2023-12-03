@@ -45,6 +45,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 	<meta charset="UTF-8">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 	<link rel="stylesheet" href="src/css/removeAds.css">
+	<link rel="icon" type="image/x-icon" href="src/img/favicon.ico">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<title>Cadastro de Aluno</title>
@@ -59,7 +60,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 			</button>
 			<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a class="nav-link" aria-current="page" href="excluir_aluno">Listar Alunos(as)</a>
+					<a class="nav-link" aria-current="page" href="aluno">Listar Alunos(as)</a>
 				</div>
 				<div class="navbar-nav">
 					<a class="nav-link" aria-current="page" href="admin">Área administrativa</a>
@@ -127,7 +128,9 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 								<input type="file" class="form-control-file" name="imagem" id="imagem" accept=".jpg, .jpeg" required>
 							</div><br>
 
-							<button type="submit" name="btnLogin" class="btn btn-primary" value="Acessar">Cadastrar</button><br><br>
+							<button type="submit" name="btnLogin" class="btn btn-primary" value="Acessar">Cadastrar</button>
+							<button type="button" name="btnCancel" class="btn btn-danger" value="Cancelar" onclick="voltar()">Cancelar</button>
+							<br><br>
 						</form>
 					</div>
 				</div>
@@ -143,6 +146,7 @@ if (isset($_FILES["imagem"]) && !empty($_FILES["imagem"])) {
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="src/js/capitalizeFirstLetter.js"></script>
+	<script src="src/js/navegarEmAbas.js"></script>
 
 	<?php
 	include('dark_mode.php');

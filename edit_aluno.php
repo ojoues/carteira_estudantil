@@ -31,7 +31,7 @@ $result_usuario = mysqli_query($conn, "SELECT * FROM estudante WHERE id = $id");
 
 if (!$result_usuario) {
 	$_SESSION['msg'] = "<p style='color:red;'>Erro ao buscar o estudante no banco de dados.</p>";
-	header("Location: excluir_aluno");
+	header("Location: aluno");
 	exit();
 }
 
@@ -75,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<meta charset="UTF-8">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 	<link rel="stylesheet" href="src/css/removeAds.css">
+	<link rel="icon" type="image/x-icon" href="src/img/favicon.ico">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<title>Cadastro de Aluno</title>
@@ -90,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
 					<a class="nav-link" aria-current="page" href="cad_aluno">Cadastrar novo Aluno(a)</a>
-					<a class="nav-link" href="excluir_aluno">Listar Usuários(as)</a>
+					<a class="nav-link" href="aluno">Listar Usuários(as)</a>
 					<a class="nav-link" href="admin">Área Administrativa</a>
 				</div>
 			</div>
@@ -152,7 +153,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 								<input type="file" class="form-control-file" name="imagem" accept=".jpg, .jpeg"><br><br>
 							</div>
 
-							<button type="submit" class="btn btn-primary" value="Corrigir">Corrigir</button><br><br>
+							<button type="submit" class="btn btn-primary" value="Corrigir">Corrigir</button>
+							<button type="button" name="btnCancel" class="btn btn-danger" value="Cancelar" onclick="voltar()">Cancelar</button>
+							<br><br>
 						</form>
 					</div>
 				</div>
@@ -167,6 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
 	<script src="src/js/capitalizeFirstLetter.js"></script>
+	<script src="src/js/navegarEmAbas.js"></script>
 
 	<?php
 	include('dark_mode.php');

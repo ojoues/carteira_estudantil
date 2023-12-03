@@ -14,9 +14,6 @@ $validade = $_POST['validade'];
 // Diretório onde as fotos serão armazenadas
 $diretorio_destino = "./src/img/uploads/"; // Certifique-se de que este diretório seja válido
 
-// Conecte-se ao banco de dados (você deve já ter uma conexão estabelecida)
-include_once("conexao.php"); // Inclua o arquivo de conexão com o banco de dados
-
 // Insira os dados na tabela (sem o caminho da imagem) e obtenha o ID inserido
 $sql = "INSERT INTO estudante (nome, data_nascimento, sexo, instituicao, curso, cpf, validade, modificado, criado) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())";
 $stmt = mysqli_prepare($conn, $sql);
@@ -34,8 +31,6 @@ if (mysqli_stmt_execute($stmt)) {
 
 	// Move o arquivo original para o diretório de destino
 	if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_arquivo_original)) {
-		// Corrija a orientação da imagem usando ImageMagick
-		corrigirOrientacaoImagem($caminho_arquivo_original);
 
 		// Renomeie a imagem redimensionada
 		$novo_nome_arquivo = $id_aluno . ".jpg";
@@ -63,10 +58,4 @@ if (mysqli_stmt_execute($stmt)) {
 } else {
 	$_SESSION['msg'] = "<p style='color:red;'>Erro ao cadastrar aluno: " . mysqli_error($conn) . "</p>";
 	header("Location: cad_aluno");
-}
-
-// Função para corrigir a orientação da imagem usando ImageMagick
-function corrigirOrientacaoImagem($caminho)
-{
-	exec("convert $caminho -auto-orient $caminho");
 }

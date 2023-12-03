@@ -12,6 +12,7 @@
     <title><?php echo $pageTitle; ?></title>
     <link rel="stylesheet" href="src/css/pdf_aluno.css">
     <link rel="stylesheet" href="src/css/removeAds.css">
+    <link rel="icon" type="image/x-icon" href="src/img/favicon.ico">
 </head>
 
 <body>
@@ -141,7 +142,7 @@
                 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
                 // Link estático do site
-                $siteLink = "https://conjunct-recipient.000webhostapp.com/pesquisar?aluno=";
+                $siteLink = "http://carteiraestudantil.rf.gd/pesquisar?aluno=";
 
                 // Concatenar o link estático com o ID do aluno
                 $linkCompleto = $siteLink . $id;
