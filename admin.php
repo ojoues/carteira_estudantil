@@ -48,7 +48,7 @@ $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link" aria-current="page" href="/">Início</a>
-                    <a class="nav-link" href="sair">Sair</a>
+                    <a class="nav-link" href="sair">Deslogar</a>
                 </div>
             </div>
         </div>
