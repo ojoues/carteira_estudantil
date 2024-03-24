@@ -103,23 +103,23 @@ include_once("../../conexao.php");
 
 				//Limitar os link antes depois
 				$max_links = 2;
-				echo "<a href='?pagina=1'>Primeira</a> ";
+				echo "<a class='btn btn-primary' href='?pagina=1'>Primeira</a> ";
 
 				for ($pag_ant = $pagina - $max_links; $pag_ant <= $pagina - 1; $pag_ant++) {
 					if ($pag_ant >= 1) {
-						echo "<a href='?pagina=$pag_ant'>$pag_ant</a> ";
+						echo "<a class='btn btn-primary' href='?pagina=$pag_ant'>$pag_ant</a> ";
 					}
 				}
 
-				echo "$pagina ";
+				echo "<a class='btn btn-secondary'>$pagina</a>&nbsp;";
 
 				for ($pag_dep = $pagina + 1; $pag_dep <= $pagina + $max_links; $pag_dep++) {
 					if ($pag_dep <= $quantidade_pg) {
-						echo "<a href='?pagina=$pag_dep'>$pag_dep</a> ";
+						echo "<a class='btn btn-primary' href='?pagina=$pag_dep'>$pag_dep</a> ";
 					}
 				}
 
-				echo "<a href='?pagina=$quantidade_pg'>Última</a>";
+				echo "<a class='btn btn-primary' href='?pagina=$quantidade_pg'>Última</a>";
 
 				?>
 			</div>
