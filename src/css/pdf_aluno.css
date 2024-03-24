@@ -68,17 +68,17 @@ p {
 
 @font-face {
   font-family: Joanna-Sans-Nova-Medium;
-  src: url("../fonts/JoannaSansNovaMedium.ttf") format("truetype");
+  src: url("../fonts/JoannaSansNovaMedium.woff") format("truetype");
 }
 
 @font-face {
   font-family: Tailwind-Regular;
-  src: url("../fonts/Tailwind-Regular.ttf") format("truetype");
+  src: url("../fonts/Tailwind-Regular.woff") format("truetype");
 }
 
 @font-face {
   font-family: Woolworth-ExtraBold;
-  src: url("../fonts/Woolworth-ExtraBold.ttf") format("truetype");
+  src: url("../fonts/Woolworth-ExtraBold.woff") format("truetype");
 }
 
 .titulo {
