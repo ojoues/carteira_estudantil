@@ -23,6 +23,7 @@ $_SESSION['ultimo_acesso'] = time();
 
 // Obtém o nome do usuário logado, se estiver disponível na sessão
 $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "Usuário Desconhecido";
+$usuario_id = isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : null; // Obtém o ID do usuário logado
 
 include_once("../../conexao.php");
 ?>
@@ -81,14 +82,23 @@ include_once("../../conexao.php");
 				$resultado_usuarios = mysqli_query($conn, $result_usuarios);
 				while ($row_usuario = mysqli_fetch_assoc($resultado_usuarios)) {
 					echo "<hr>";
-					echo "ID: " . $row_usuario['id'] . "<br>";
 					echo "Nome: " . $row_usuario['nome'] . "<br>";
 					echo "Usuário: " . $row_usuario['usuario'] . "<br>";
 					echo "E-mail: " . $row_usuario['email'] . "<br>";
-					echo "<a href='edit_usuario?id=" . $row_usuario['id'] . "' class='btn btn-primary'>Editar</a>";
-					echo " ";
-					echo "<a href='proc_apagar_usuario?id=" . htmlspecialchars($row_usuario['id'], ENT_QUOTES, 'UTF-8') . "' data-user-id='" . htmlspecialchars($row_usuario['id'], ENT_QUOTES, 'UTF-8') . "' class='btn btn-danger delete-button confirm-delete' data-nome='" . htmlspecialchars_decode(htmlspecialchars($row_usuario['nome'], ENT_QUOTES, 'UTF-8'), ENT_QUOTES) . "'>Apagar</a>";
 
+					// Verificar se o ID do usuário é diferente de 1 para exibir os botões de edição e exclusão
+					if ($row_usuario['id'] != 1) {
+						// Exibir botão de edição
+						echo "<a href='edit_usuario?id=" . $row_usuario['id'] . "' class='btn btn-primary'>Editar</a>";
+						echo " ";
+						// Exibir botão de exclusão
+						echo "<a href='proc_apagar_usuario?id=" . htmlspecialchars($row_usuario['id'], ENT_QUOTES, 'UTF-8') . "' data-user-id='" . htmlspecialchars($row_usuario['id'], ENT_QUOTES, 'UTF-8') . "' class='btn btn-danger delete-button confirm-delete' data-nome='" . htmlspecialchars_decode(htmlspecialchars($row_usuario['nome'], ENT_QUOTES, 'UTF-8'), ENT_QUOTES) . "'>Apagar</a>";
+					} elseif ($usuario_id == 1) { // Verificar se o usuário logado tem ID 1 para exibir o botão de edição apenas para o ID 1
+						echo "<a href='edit_usuario?id=" . $row_usuario['id'] . "' class='btn btn-primary'>Editar</a>";
+					} else {
+						// Informar que o usuário de ID 1 não pode ser alterado se o usuário logado não for o próprio ID 1
+						echo "<span class='text-danger'>Apenas " . $row_usuario['nome'] . " pode alterar este cadastro.</span>";
+					}
 
 					echo "<hr>";
 				}
