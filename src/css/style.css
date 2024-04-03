@@ -69,3 +69,13 @@ input[type="submit"] {
 .botao {
   margin-top: 5px;
 }
+
+.botao-pesquisar {
+  font-size: 13px;
+}
+
+.formulario {
+  border: none;
+  margin-bottom: -45px;
+  width: 100%;
+}

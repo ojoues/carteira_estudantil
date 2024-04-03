@@ -25,6 +25,29 @@ $_SESSION['ultimo_acesso'] = time();
 // Obtém o nome do usuário logado, se estiver disponível na sessão
 $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "Usuário Desconhecido";
 
+// Define as variáveis para paginação
+$qnt_result_pg = 5;
+$pagina_atual = filter_input(INPUT_GET, 'pagina', FILTER_SANITIZE_NUMBER_INT);
+$pagina = (!empty($pagina_atual)) ? $pagina_atual : 1;
+$inicio = ($qnt_result_pg * $pagina) - $qnt_result_pg;
+
+// Processamento da pesquisa
+if (isset($_GET['pesquisa'])) {
+	$pesquisa = $_GET['pesquisa'];
+
+	// Modifique a consulta SQL para incluir a pesquisa
+	$query = "SELECT * FROM estudante WHERE nome LIKE '%$pesquisa%' ORDER BY criado DESC LIMIT $inicio, $qnt_result_pg";
+} else {
+	// Consulta SQL padrão
+	$query = "SELECT * FROM estudante ORDER BY criado DESC LIMIT $inicio, $qnt_result_pg";
+}
+
+$result = mysqli_query($conn, $query);
+
+if (!$result) {
+	die('Erro na consulta SQL: ' . mysqli_error($conn));
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -63,25 +86,17 @@ $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "
 			<div class="col-md-8">
 				<h1>Alunos cadastrados</h1>
 
+				<!-- Barra de pesquisa -->
+				<form method="GET" action="" class="formulario">
+					<div class="input-group input-group-sm">
+						<input type="text" class="form-control" placeholder="Pesquisar aluno(a)..." name="pesquisa">
+						<div class="input-group-prepend">
+							<button class="btn btn-primary botao-pesquisar" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+						</div>
+					</div>
+				</form>
+
 				<?php
-				if (isset($_SESSION['msg'])) {
-					echo '<div class="alert alert-info">' . $_SESSION['msg'] . '</div>';
-					unset($_SESSION['msg']);
-				}
-
-				$qnt_result_pg = 5;
-				$pagina_atual = filter_input(INPUT_GET, 'pagina', FILTER_SANITIZE_NUMBER_INT);
-				$pagina = (!empty($pagina_atual)) ? $pagina_atual : 1;
-				$inicio = ($qnt_result_pg * $pagina) - $qnt_result_pg;
-
-				$query = "SELECT * FROM estudante ORDER BY criado DESC LIMIT $inicio, $qnt_result_pg";
-
-				$result = mysqli_query($conn, $query);
-
-				if (!$result) {
-					die('Erro na consulta SQL: ' . mysqli_error($conn));
-				}
-
 				if (mysqli_num_rows($result) > 0) {
 					while ($row = mysqli_fetch_assoc($result)) {
 						echo "<hr>";
