@@ -151,7 +151,7 @@
                 function generateQRCodeForAluno($linkCompleto, $size = 100)
                 {
                     // Montar o URL do Google Charts API
-                    $url = 'https://chart.googleapis.com/chart?chs=' . $size . 'x' . $size . '&cht=qr&chl=' . urlencode($linkCompleto);
+                    $url = 'https://api.qrserver.com/v1/create-qr-code/?size=' . $size . 'x' . $size . '&data=' . urlencode($linkCompleto);
 
                     // Exibir a imagem do QR Code
                     echo '<img src="' . $url . '" alt="QR Code">';
