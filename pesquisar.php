@@ -119,10 +119,6 @@ function mask($val, $mask)
             <?php } ?>
         </div>
     </div>
-
-    <?php
-    include('dark_mode.php');
-    ?>
 </body>
 
 </html>

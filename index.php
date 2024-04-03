@@ -35,7 +35,7 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link" href="admin">Admin</a>
+          <a class="nav-link" href="admin"><i class="fa-solid fa-user"></i> Admin</a>
         </div>
       </div>
     </div>
@@ -61,10 +61,6 @@
       $mensagem = urldecode($_GET['mensagem']);
       echo '<div id="error-message" style="background-color: #ff5252;" class="alert alert-danger">' . $mensagem . '</div>';
     }
-    ?>
-
-    <?php
-    include('dark_mode.php');
     ?>
   </div>
 </body>

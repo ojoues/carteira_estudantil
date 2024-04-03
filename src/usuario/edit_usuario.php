@@ -37,8 +37,8 @@ $row_usuario = mysqli_fetch_assoc($resultado_usuario);
 <head>
 	<meta charset="utf-8">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-	<link rel="stylesheet" href="../css/removeAds.css">
 	<link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Editar Usuário</title>
 </head>
@@ -52,9 +52,9 @@ $row_usuario = mysqli_fetch_assoc($resultado_usuario);
 			</button>
 			<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a class="nav-link" aria-current="page" href="cad_usuario">Cadastrar novo Usuário(a)</a>
-					<a class="nav-link" href="../user/">Listar Usuários(as)</a>
-					<a class="nav-link" href="../../admin">Área Administrativa</a>
+					<a class="nav-link" aria-current="page" href="cad_usuario"><i class="fa-solid fa-user-shield"></i> Cadastrar Usuário(a)</a>
+					<a class="nav-link" href="../usuario/"><i class="fa-solid fa-list-check"></i> Listar Usuários(as)</a>
+					<a class="nav-link" href="../../admin"><i class="fa-solid fa-user"></i> Área Administrativa</a>
 				</div>
 			</div>
 		</div>
@@ -95,8 +95,8 @@ $row_usuario = mysqli_fetch_assoc($resultado_usuario);
 								<input type="password" name="nova_senha" class="form-control" placeholder="Digite a nova senha"><br>
 							</div>
 
-							<input type="submit" class="btn btn-primary" value="Corrigir">
-							<button type="button" name="btnCancel" class="btn btn-danger" value="Cancelar" onclick="voltar()">Cancelar</button>
+							<button type="submit" name="btnCorrigir" class="btn btn-primary" value="Corrigir" onclick="voltar()"><i class="fa-solid fa-pen-to-square"></i> Corrigir</button>
+							<button type="button" name="btnCancel" class="btn btn-danger" value="Cancelar" onclick="voltar()"><i class="fa-solid fa-square-xmark"></i> Cancelar</button>
 						</form>
 					</div>
 				</div>
@@ -113,10 +113,6 @@ $row_usuario = mysqli_fetch_assoc($resultado_usuario);
 
 	<script src="../js/capitalizeFirstLetter.js"></script>
 	<script src="../js/navegarEmAbas.js"></script>
-
-	<?php
-	include('../../dark_mode.php');
-	?>
 </body>
 
 </html>

@@ -49,10 +49,10 @@ if (mysqli_stmt_execute($stmt)) {
         mysqli_stmt_execute($stmt_update);
 
         $_SESSION['msg'] = "<p style='color:green;'>Aluno cadastrado com sucesso!</p>";
-        header("Location: cad_aluno");
+        header("Location: .src/aluno/cad_aluno");
     } else {
         $_SESSION['msg'] = "<p style='color:red;'>Erro ao enviar a foto.</p>";
-        header("Location: cad_aluno");
+        header("Location: .src/aluno/cad_aluno");
     }
 
     // Feche as declarações
@@ -60,7 +60,7 @@ if (mysqli_stmt_execute($stmt)) {
     mysqli_stmt_close($stmt_update);
 } else {
     $_SESSION['msg'] = "<p style='color:red;'>Erro ao cadastrar aluno: " . mysqli_error($conn) . "</p>";
-    header("Location: cad_aluno");
+    header("Location: .src/aluno/cad_aluno");
 }
 
 function fixImageOrientation($source, $destination) {

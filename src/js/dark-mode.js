@@ -11,10 +11,10 @@ function toggleBootstrapTheme() {
     const currentTheme = document.documentElement.getAttribute("data-bs-theme")
     if (currentTheme === "dark") {
         document.documentElement.setAttribute("data-bs-theme", "light")
-        document.cookie = "bootstrap-theme=light expires=Fri, 31 Dec 9999 23:59:59 GMT path=/"
+        document.cookie = `bootstrap-theme=${encodeURIComponent("light")} expires=Fri, 31 Dec 9999 23:59:59 GMT path=/`
     } else {
         document.documentElement.setAttribute("data-bs-theme", "dark")
-        document.cookie = "bootstrap-theme=dark expires=Fri, 31 Dec 9999 23:59:59 GMT path=/"
+        document.cookie = `bootstrap-theme=${encodeURIComponent("dark")} expires=Fri, 31 Dec 9999 23:59:59 GMT path=/`
     }
 
     // Chama a função para atualizar o ícone
@@ -22,7 +22,7 @@ function toggleBootstrapTheme() {
 }
 
 // Verifica o tema salvo em um cookie e define o tema da página
-const savedTheme = document.cookie.replace(/(?:(?:^|.*\s*)bootstrap-theme\s*=\s*([^]*).*$)|^.*$/, "$1")
+const savedTheme = decodeURIComponent(document.cookie.replace(/(?:(?:^|.*\s*)bootstrap-theme\s*=\s*([^]*).*$)|^.*$/, "$1"))
 if (savedTheme === "dark") {
     document.documentElement.setAttribute("data-bs-theme", "dark")
 } else {

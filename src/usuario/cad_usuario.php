@@ -33,8 +33,8 @@ include_once("../../conexao.php");
 <head>
 	<meta charset="utf-8">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-	<link rel="stylesheet" href="../css/removeAds.css">
 	<link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Cadastro de Usuário</title>
 </head>
@@ -48,8 +48,8 @@ include_once("../../conexao.php");
 			</button>
 			<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a class="nav-link" aria-current="page" href="../user/">Listar Usuários(as)</a>
-					<a class="nav-link" href="../../admin">Área administrativa</a>
+					<a class="nav-link" aria-current="page" href="../usuario/"><i class="fa-solid fa-list-check"></i> Listar Usuários(as)</a>
+					<a class="nav-link" href="../../admin"><i class="fa-solid fa-user"></i> Área administrativa</a>
 				</div>
 			</div>
 		</div>
@@ -89,8 +89,8 @@ include_once("../../conexao.php");
 								<input type="password" class="form-control" name="senha" id="senha" placeholder="Digite a sua senha" required><br>
 							</div>
 
-							<input type="submit" class="btn btn-primary" value="Cadastrar">
-							<button type="button" name="btnCancel" class="btn btn-danger" value="Cancelar" onclick="voltar()">Cancelar</button>
+							<button type="submit" name="btnCadastar" class="btn btn-primary" value="Cadastrar"><i class="fa-solid fa-address-card"></i> Cadastrar</button>
+							<button type="button" name="btnCancel" class="btn btn-danger" value="Cancelar" onclick="voltar()"><i class="fa-solid fa-square-xmark"></i> Cancelar</button>
 						</form>
 					</div>
 				</div>
@@ -105,10 +105,6 @@ include_once("../../conexao.php");
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="../js/capitalizeFirstLetter.js"></script>
 	<script src="../js/navegarEmAbas.js"></script>
-
-	<?php
-	include('../../dark_mode.php');
-	?>
 </body>
 
 </html>

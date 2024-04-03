@@ -3,7 +3,7 @@ session_start();
 
 // Verifique se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
-	header("Location: login");
+	header("Location: ../../login");
 	exit();
 }
 
@@ -14,7 +14,7 @@ $inatividade_permitida = 600; // 30 minutos (pode ajustar conforme necessário)
 if (isset($_SESSION['ultimo_acesso']) && (time() - $_SESSION['ultimo_acesso']) > $inatividade_permitida) {
 	// Sessão expirou, redirecione o usuário para a página de login
 	session_destroy();
-	header("Location: login");
+	header("Location: ../../login");
 	exit();
 }
 
@@ -24,7 +24,7 @@ $_SESSION['ultimo_acesso'] = time();
 // Obtém o nome do usuário logado, se estiver disponível na sessão
 $usuario_nome = isset($_SESSION['usuario_nome']) ? $_SESSION['usuario_nome'] : "Usuário Desconhecido";
 
-include_once("conexao.php");
+include_once("../../conexao.php");
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0; // Use intval para obter um valor inteiro
 $result_usuario = mysqli_query($conn, "SELECT * FROM estudante WHERE id = $id");
@@ -52,12 +52,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 			if (!$resultado_atualiza_imagem) {
 				$_SESSION['msg'] = "<p style='color:red;'>Erro ao atualizar o caminho da imagem no banco de dados.</p>";
-				header("Location: edit_aluno?id=$id");
+				header("Location: .src/aluno/edit_aluno?id=$id");
 				exit();
 			}
 		} else {
 			$_SESSION['msg'] = "<p style='color:red;'>Erro ao fazer upload da imagem.</p>";
-			header("Location: edit_aluno?id=$id");
+			header("Location: .src/aluno/edit_aluno?id=$id");
 			exit();
 		}
 	}
@@ -74,8 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
 	<meta charset="UTF-8">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-	<link rel="stylesheet" href="src/css/removeAds.css">
 	<link rel="icon" type="image/x-icon" href="src/img/favicon.ico">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<title>Cadastro de Aluno</title>
@@ -90,9 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			</button>
 			<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a class="nav-link" aria-current="page" href="cad_aluno">Cadastrar novo Aluno(a)</a>
-					<a class="nav-link" href="aluno">Listar Usuários(as)</a>
-					<a class="nav-link" href="admin">Área Administrativa</a>
+					<a class="nav-link" aria-current="page" href="cad_aluno"><i class="fa-solid fa-user-shield"></i> Cadastrar novo Aluno(a)</a>
+					<a class="nav-link" href="./"><i class="fa-solid fa-list-check"></i> Listar Usuários(as)</a>
+					<a class="nav-link" href="../../admin"><i class="fa-solid fa-user"></i> Área Administrativa</a>
 				</div>
 			</div>
 		</div>
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 					}
 					?>
 					<div class="card-body">
-						<form method="POST" action="proc_edit_aluno" enctype="multipart/form-data">
+						<form method="POST" action="../../proc_edit_aluno" enctype="multipart/form-data">
 							<input type="hidden" name="id" value="<?php echo $row_usuario['id']; ?>">
 							<div class="form-group">
 								<label for="nome">Nome:</label>
@@ -153,8 +153,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 								<input type="file" class="form-control-file" name="imagem" accept=".jpg, .jpeg"><br><br>
 							</div>
 
-							<button type="submit" class="btn btn-primary" value="Corrigir">Corrigir</button>
-							<button type="button" name="btnCancel" class="btn btn-danger" value="Cancelar" onclick="voltar()">Cancelar</button>
+							<button type="submit" class="btn btn-primary" value="Corrigir"><i class="fa-solid fa-pen-to-square"></i> Corrigir</button>
+							<button type="button" name="btnCancel" class="btn btn-danger" value="Cancelar" onclick="voltar()"><i class="fa-solid fa-square-xmark"></i> Cancelar</button>
 							<br><br>
 						</form>
 					</div>
@@ -169,12 +169,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
-	<script src="src/js/capitalizeFirstLetter.js"></script>
-	<script src="src/js/navegarEmAbas.js"></script>
-
-	<?php
-	include('dark_mode.php');
-	?>
+	<script src="../js/capitalizeFirstLetter.js"></script>
+	<script src="../js/navegarEmAbas.js"></script>
 </body>
 
 </html>

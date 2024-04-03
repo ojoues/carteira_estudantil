@@ -33,8 +33,9 @@ include_once("../../conexao.php");
 <head>
 	<meta charset="utf-8">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-	<link rel="stylesheet" href="../css/removeAds.css">
 	<link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Listar Usuários</title>
 </head>
@@ -48,8 +49,8 @@ include_once("../../conexao.php");
 			</button>
 			<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a class="nav-link" aria-current="page" href="cad_usuario">Cadastrar Usuário(a)</a>
-					<a class="nav-link" href="../../admin">Área administrativa</a>
+					<a class="nav-link" aria-current="page" href="cad_usuario"><i class="fa-solid fa-user-shield"></i> Cadastrar Usuário(a)</a>
+					<a class="nav-link" href="../../admin"><i class="fa-solid fa-user"></i> Área administrativa</a>
 				</div>
 			</div>
 		</div>
@@ -89,12 +90,12 @@ include_once("../../conexao.php");
 					// Verificar se o ID do usuário é diferente de 1 para exibir os botões de edição e exclusão
 					if ($row_usuario['id'] != 1) {
 						// Exibir botão de edição
-						echo "<a href='edit_usuario?id=" . $row_usuario['id'] . "' class='btn btn-primary'>Editar</a>";
+						echo "<a href='edit_usuario?id=" . $row_usuario['id'] . "' class='btn btn-primary botao'><i class='fa-solid fa-pen-to-square'></i> Editar</a>";
 						echo " ";
 						// Exibir botão de exclusão
-						echo "<a href='proc_apagar_usuario?id=" . htmlspecialchars($row_usuario['id'], ENT_QUOTES, 'UTF-8') . "' data-user-id='" . htmlspecialchars($row_usuario['id'], ENT_QUOTES, 'UTF-8') . "' class='btn btn-danger delete-button confirm-delete' data-nome='" . htmlspecialchars_decode(htmlspecialchars($row_usuario['nome'], ENT_QUOTES, 'UTF-8'), ENT_QUOTES) . "'>Apagar</a>";
+						echo "<a href='proc_apagar_usuario?id=" . htmlspecialchars($row_usuario['id'], ENT_QUOTES, 'UTF-8') . "' data-user-id='" . htmlspecialchars($row_usuario['id'], ENT_QUOTES, 'UTF-8') . "' class='btn btn-danger delete-button confirm-delete botao' data-nome='" . htmlspecialchars_decode(htmlspecialchars($row_usuario['nome'], ENT_QUOTES, 'UTF-8'), ENT_QUOTES) . "'><i class='fa-solid fa-trash'></i> Apagar</a>";
 					} elseif ($usuario_id == 1) { // Verificar se o usuário logado tem ID 1 para exibir o botão de edição apenas para o ID 1
-						echo "<a href='edit_usuario?id=" . $row_usuario['id'] . "' class='btn btn-primary'>Editar</a>";
+						echo "<a href='edit_usuario?id=" . $row_usuario['id'] . "' class='btn btn-primary botao'><i class='fa-solid fa-pen-to-square'></i> Editar</a>";
 					} else {
 						// Informar que o usuário de ID 1 não pode ser alterado se o usuário logado não for o próprio ID 1
 						echo "<span class='text-danger'>Apenas " . $row_usuario['nome'] . " pode alterar este cadastro.</span>";
@@ -113,23 +114,23 @@ include_once("../../conexao.php");
 
 				//Limitar os link antes depois
 				$max_links = 2;
-				echo "<a class='btn btn-primary' href='?pagina=1'>Primeira</a> ";
+				echo "<a class='btn btn-primary botao' href='?pagina=1'><i class='fa-solid fa-circle-left'></i> Primeira</a> ";
 
 				for ($pag_ant = $pagina - $max_links; $pag_ant <= $pagina - 1; $pag_ant++) {
 					if ($pag_ant >= 1) {
-						echo "<a class='btn btn-primary' href='?pagina=$pag_ant'>$pag_ant</a> ";
+						echo "<a class='btn btn-primary botao' href='?pagina=$pag_ant'>$pag_ant</a> ";
 					}
 				}
 
-				echo "<a class='btn btn-secondary'>$pagina</a>&nbsp;";
+				echo "<a class='btn btn-secondary botao'>$pagina</a>&nbsp;";
 
 				for ($pag_dep = $pagina + 1; $pag_dep <= $pagina + $max_links; $pag_dep++) {
 					if ($pag_dep <= $quantidade_pg) {
-						echo "<a class='btn btn-primary' href='?pagina=$pag_dep'>$pag_dep</a> ";
+						echo "<a class='btn btn-primary botao' href='?pagina=$pag_dep'>$pag_dep</a> ";
 					}
 				}
 
-				echo "<a class='btn btn-primary' href='?pagina=$quantidade_pg'>Última</a>";
+				echo "<a class='btn btn-primary botao' href='?pagina=$quantidade_pg'>Última <i class='fa-solid fa-circle-right'></i></a>";
 
 				?>
 			</div>
@@ -142,10 +143,6 @@ include_once("../../conexao.php");
 
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-
-	<?php
-	include('../../dark_mode.php');
-	?>
 </body>
 
 </html>
